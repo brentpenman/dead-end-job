@@ -81,6 +81,13 @@
     handleHotspotClick: function(hotspot) {
       console.log('Hotspot clicked:', hotspot.label, '(type:', hotspot.type + ')');
 
+      // Check if player has an inventory item selected
+      if (typeof Inventory !== 'undefined' && Inventory.getSelected && Inventory.getSelected()) {
+        // Player is trying to use selected item on this hotspot
+        Inventory.useOnHotspot(hotspot);
+        return;
+      }
+
       switch (hotspot.type) {
         case 'exit':
           if (hotspot.target) {
@@ -113,12 +120,11 @@
           break;
 
         case 'use':
-          // Use interactions require selected inventory item
-          // This will be implemented when Inventory system is built
-          if (typeof Inventory !== 'undefined' && Inventory.handleUse) {
-            Inventory.handleUse(hotspot);
+          // Use hotspot without selected item - show examine text
+          if (hotspot.onInteract) {
+            Game.showText(hotspot.onInteract);
           } else {
-            Game.showText('(Inventory system not yet available)');
+            Game.showText('I need the right item to use this.');
           }
           break;
 

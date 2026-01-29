@@ -17,6 +17,17 @@
       console.log('Game initializing...');
       this.registerTestScenes();
       Scene.render(GameState.currentScene);
+
+      // Initialize inventory system if available
+      if (typeof Inventory !== 'undefined' && Inventory.init) {
+        Inventory.init();
+      }
+
+      // Initialize dialogue system if available
+      if (typeof Dialogue !== 'undefined' && Dialogue.init) {
+        Dialogue.init();
+      }
+
       console.log('Game initialized');
     },
 
@@ -56,6 +67,18 @@
             height: 40,
             label: 'Bob',
             dialogueId: 'bob-intro'
+          },
+          {
+            id: 'key',
+            type: 'pickup',
+            x: 50,
+            y: 60,
+            width: 8,
+            height: 8,
+            label: 'Rusty Key',
+            itemId: 'rusty-key',
+            itemDescription: 'A rusty old key. Looks like it fits something.',
+            itemIcon: '🔑'
           }
         ]
       };
@@ -93,7 +116,22 @@
             width: 8,
             height: 10,
             label: 'Coffee cup',
-            itemId: 'coffee-cup'
+            itemId: 'coffee-cup',
+            itemDescription: 'An old coffee cup with mysterious stains.',
+            itemIcon: '☕'
+          },
+          {
+            id: 'locked-box',
+            type: 'use',
+            x: 30,
+            y: 50,
+            width: 15,
+            height: 12,
+            label: 'Locked Box',
+            acceptsItem: 'rusty-key',
+            useItemText: 'The key fits! The box opens.',
+            wrongItemText: "That doesn't fit this lock.",
+            onInteract: 'A locked wooden box. Needs a key.'
           }
         ]
       };
@@ -143,6 +181,10 @@
       return GameState.inventory.some(function(item) {
         return item.id === itemId;
       });
+    },
+
+    getInventory: function() {
+      return GameState.inventory;
     },
 
     // Game state flags
