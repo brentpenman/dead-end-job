@@ -141,8 +141,8 @@
             { text: "I need Form 27-B stamped.", next: 'need-stamp' },
             { text: "How can you be so cheerful?", next: 'cheerful' },
             { text: "Nice office.", next: 'office' },
-            { text: "Here's my Form 27-B.", next: 'have-form-only', condition: { hasItem: 'form-27b' } },
-            { text: "I have the form AND the stamp. Let's do this.", next: 'stamp-form', condition: { hasFlag: 'readyToStamp' } }
+            { text: "I have the form AND the stamp. Let's do this.", next: 'stamp-form', condition: { hasItem: 'rubber-stamp' } },
+            { text: "Here's my Form 27-B.", next: 'have-form-only', condition: { hasItem: 'form-27b' } }
           ]
         },
         'need-stamp': {
@@ -184,11 +184,18 @@
           choices: [
             { text: "Finally. Thanks.", next: 'goodbye' }
           ],
-          action: { setFlag: { formStamped: true } }
+          action: {
+            removeItem: 'form-27b',
+            setFlag: { formStamped: true }
+          }
         },
         'goodbye': {
           text: "It was SO great meeting you, Morgan! Tell the next plane of existence I said HI! And remember -- every end is just a NEW BEGINNING! ...I need to get out more.",
-          choices: []
+          choices: [],
+          action: {
+            removeItem: 'rubber-stamp',
+            triggerEnding: true
+          }
         }
       }
     }

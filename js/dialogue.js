@@ -327,6 +327,12 @@
           Game.showText(action.showText);
         }, 100);
       }
+
+      if (action.triggerEnding) {
+        setTimeout(function() {
+          Game.triggerEnding();
+        }, 500);
+      }
     }
   };
 
