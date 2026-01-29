@@ -197,6 +197,7 @@
       console.log('Game initializing...');
       this.registerRooms();
       Scene.render(GameState.currentScene);
+      Scene.initResizeHandler();
 
       // Initialize inventory system if available
       if (typeof Inventory !== 'undefined' && Inventory.init) {

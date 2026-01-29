@@ -3,6 +3,10 @@
 (function() {
   'use strict';
 
+  // Track current overlay and image for resize handling
+  var _currentImg = null;
+  var _currentOverlay = null;
+
   window.Scene = {
     // Render a scene by ID
     render: function(sceneId) {
@@ -17,16 +21,28 @@
       var container = document.getElementById('scene-container');
       container.innerHTML = '';
 
-      // Create background
+      // Create background wrapper
       var background = document.createElement('div');
       background.className = 'scene-background';
       background.style.backgroundColor = sceneData.background;
+
+      // Create <img> instead of CSS background-image
       if (sceneData.backgroundImage) {
-        background.style.backgroundImage = 'url(' + sceneData.backgroundImage + ')';
+        var bgImg = document.createElement('img');
+        bgImg.className = 'bg-image';
+        bgImg.src = sceneData.backgroundImage;
+        bgImg.alt = sceneData.name;
+        background.appendChild(bgImg);
       }
       container.appendChild(background);
 
-      // Create scene elements (NPC sprites, decorations)
+      // Create scene overlay — all interactive/visual elements go here
+      var overlay = document.createElement('div');
+      overlay.className = 'scene-overlay';
+      overlay.id = 'scene-overlay';
+      container.appendChild(overlay);
+
+      // Create scene elements (NPC sprites, decorations) inside overlay
       if (sceneData.sceneElements) {
         sceneData.sceneElements.forEach(function(elemData) {
           var elem = document.createElement('div');
@@ -47,22 +63,66 @@
             img.style.filter = 'drop-shadow(0 2px 4px rgba(0,0,0,0.5))';
             elem.appendChild(img);
           }
-          container.appendChild(elem);
+          overlay.appendChild(elem);
         });
       }
 
-      // Create hotspots
+      // Create hotspots inside overlay
       if (sceneData.hotspots) {
         sceneData.hotspots.forEach(function(hotspotData) {
           var hotspot = Scene.createHotspot(hotspotData);
-          container.appendChild(hotspot);
+          overlay.appendChild(hotspot);
         });
+      }
+
+      // Position overlay to match rendered image
+      _currentImg = bgImg || null;
+      _currentOverlay = overlay;
+
+      if (_currentImg) {
+        // If image is already loaded (cached), position immediately
+        if (_currentImg.complete && _currentImg.naturalWidth > 0) {
+          Scene.positionOverlay(_currentImg, overlay);
+        }
+        _currentImg.addEventListener('load', function() {
+          Scene.positionOverlay(_currentImg, overlay);
+        });
+      } else {
+        // No background image — overlay fills container
+        overlay.style.left = '0px';
+        overlay.style.top = '0px';
+        overlay.style.width = '100%';
+        overlay.style.height = '100%';
       }
 
       // Apply visibility gating from game state
       if (Game.onSceneRender) {
         Game.onSceneRender(sceneId);
       }
+    },
+
+    // Position the overlay div to exactly match the rendered image rect
+    positionOverlay: function(img, overlay) {
+      var imgRect = img.getBoundingClientRect();
+      var containerRect = img.closest('#scene-container').getBoundingClientRect();
+
+      overlay.style.left = (imgRect.left - containerRect.left) + 'px';
+      overlay.style.top = (imgRect.top - containerRect.top) + 'px';
+      overlay.style.width = imgRect.width + 'px';
+      overlay.style.height = imgRect.height + 'px';
+    },
+
+    // Debounced resize handler to keep overlay aligned
+    initResizeHandler: function() {
+      var resizeTimer = null;
+      window.addEventListener('resize', function() {
+        if (resizeTimer) clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(function() {
+          if (_currentImg && _currentOverlay) {
+            Scene.positionOverlay(_currentImg, _currentOverlay);
+          }
+        }, 100);
+      });
     },
 
     // Create a hotspot element
@@ -85,12 +145,16 @@
       };
       hotspot.style.zIndex = zIndexMap[data.type] || 1;
 
+      // Apply type-specific cursor class directly on the hotspot
+      var cursorMode = Scene.getCursorModeForHotspot(data.type);
+      hotspot.classList.add('cursor-' + cursorMode);
+
       // Store hotspot data on element
       hotspot._hotspotData = data;
 
-      // Cursor changes on hover
+      // Cursor changes on hover (updates container-level cursor too)
       hotspot.addEventListener('mouseenter', function() {
-        Cursor.setMode(Scene.getCursorModeForHotspot(data.type));
+        Cursor.setMode(cursorMode);
       });
 
       hotspot.addEventListener('mouseleave', function() {
@@ -99,6 +163,12 @@
 
       // Click interaction
       hotspot.addEventListener('click', function() {
+        Scene.handleHotspotClick(data);
+      });
+
+      // Touch support for mobile
+      hotspot.addEventListener('touchend', function(e) {
+        e.preventDefault();
         Scene.handleHotspotClick(data);
       });
 
