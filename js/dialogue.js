@@ -126,6 +126,9 @@
       DialogueState.currentNode = 'start';
       Game.dialogueOpen = true;
 
+      // Play dialogue open sound
+      if (Game.playSound) Game.playSound('dialogue');
+
       var container = document.getElementById('dialogue-container');
       container.classList.add('active');
 

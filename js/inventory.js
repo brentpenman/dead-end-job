@@ -35,6 +35,9 @@
 
       // Add to game inventory
       if (Game.addItem(item)) {
+        // Play pickup sound
+        if (Game.playSound) Game.playSound('pickup');
+
         // Re-render inventory bar
         this.render();
 
