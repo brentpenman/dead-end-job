@@ -189,7 +189,9 @@
           width: 2.71,
           height: 96.56,
           target: 'break-room',
-          label: 'Break Room'
+          label: 'Break Room',
+          requiredFlag: 'clerkGaveDirections',
+          blockedText: "The Clerk clears his throat. \"You can't go back there without a number. Take a number from the machine in the Waiting Room first.\""
         },
         {
           id: 'exit-filing',
@@ -199,7 +201,10 @@
           width: 11.44,
           height: 18.94,
           target: 'filing-room',
-          label: 'Filing Room'
+          label: 'Filing Room',
+          exitStyle: 'door',
+          requiredFlag: 'clerkGaveDirections',
+          blockedText: "The Clerk blocks your path. \"Number first. Machine's in the Waiting Room. I don't make the rules.\""
         },
         {
           id: 'exit-manager',
@@ -209,7 +214,10 @@
           width: 9.23,
           height: 26.94,
           target: 'manager-office',
-          label: "Manager's Office"
+          label: "Manager's Office",
+          exitStyle: 'door',
+          requiredFlag: 'clerkGaveDirections',
+          blockedText: "The Clerk sighs. \"You can't see the Manager without a number. Policy is policy.\""
         }
       ]
     },
@@ -440,7 +448,8 @@
           width: 12.67,
           height: 37.39,
           target: 'front-desk',
-          label: 'Front Desk'
+          label: 'Front Desk',
+          exitStyle: 'door'
         }
       ]
     },

@@ -147,6 +147,14 @@
 
       // Apply type-specific cursor class directly on the hotspot
       var cursorMode = Scene.getCursorModeForHotspot(data.type);
+      // Use appropriate cursor for exit type and position
+      if (data.type === 'exit') {
+        if (data.exitStyle === 'door') {
+          cursorMode = 'exit-door';
+        } else if (data.x < 50) {
+          cursorMode = 'exit-left';
+        }
+      }
       hotspot.classList.add('cursor-' + cursorMode);
 
       // Store hotspot data on element
@@ -205,6 +213,10 @@
 
       switch (hotspot.type) {
         case 'exit':
+          if (hotspot.requiredFlag && !Game.getFlag(hotspot.requiredFlag)) {
+            Game.showText(hotspot.blockedText || "I can't go there yet.");
+            break;
+          }
           if (hotspot.target) {
             Game.changeScene(hotspot.target);
           } else {

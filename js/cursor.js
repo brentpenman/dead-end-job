@@ -30,7 +30,9 @@
           'cursor-look',
           'cursor-use',
           'cursor-talk',
-          'cursor-exit'
+          'cursor-exit',
+          'cursor-exit-door',
+          'cursor-exit-left'
         );
 
         // Add new cursor mode class
