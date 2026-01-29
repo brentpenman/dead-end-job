@@ -167,6 +167,11 @@
 
       DialogueState.currentNode = nodeId;
 
+      // Execute node-level action (if any)
+      if (node.action) {
+        this.executeAction(node.action);
+      }
+
       // Set NPC name
       var npcName = document.getElementById('dialogue-npc-name');
       npcName.textContent = tree.npcName;
@@ -338,6 +343,11 @@
 
       if (action.removeItem) {
         Game.removeItem(action.removeItem);
+      }
+
+      // Re-render inventory if items changed
+      if ((action.giveItem || action.removeItem) && typeof Inventory !== 'undefined' && Inventory.render) {
+        Inventory.render();
       }
 
       if (action.showText) {

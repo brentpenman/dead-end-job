@@ -75,6 +75,16 @@
       hotspot.style.height = data.height + '%';
       hotspot.title = data.label || '';
 
+      // Z-index hierarchy: interactive hotspots above passive ones
+      var zIndexMap = {
+        'pickup': 5,
+        'talk': 4,
+        'use': 3,
+        'exit': 2,
+        'look': 1
+      };
+      hotspot.style.zIndex = zIndexMap[data.type] || 1;
+
       // Store hotspot data on element
       hotspot._hotspotData = data;
 
