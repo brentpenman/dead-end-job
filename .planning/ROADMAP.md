@@ -11,7 +11,7 @@ Build a complete point-and-click adventure game in four phases: first the core e
 - Decimal phases (e.g., 2.1): Urgent insertions (marked with INSERTED)
 
 - [x] **Phase 1: Engine Systems** - Scene rendering, inventory mechanics, and dialogue system
-- [ ] **Phase 2: World Building** - All rooms, NPCs, hotspots, and written content
+- [x] **Phase 2: World Building** - All rooms, NPCs, hotspots, and written content
 - [ ] **Phase 3: Puzzle Chain** - The three inventory puzzles wired into a gated progression
 - [ ] **Phase 4: Art and Audio** - Gemini images, cursor icons, inventory sprites, music, sound effects
 
@@ -47,8 +47,8 @@ Plans:
 **Plans**: 2 plans
 
 Plans:
-- [ ] 02-01: Room definitions -- title screen, all 5 rooms with hotspots and exits, ending screen, navigation graph
-- [ ] 02-02: Content writing -- NPC dialogue trees (Clerk, Cabinet, Manager), hotspot examine text, Morgan's monologue voice, humor pass
+- [x] 02-01: Room definitions -- title screen, all 5 rooms with hotspots and exits, ending screen, navigation graph
+- [x] 02-02: Content writing -- NPC dialogue trees (Clerk, Cabinet, Manager), hotspot examine text, Morgan's monologue voice, humor pass
 
 ### Phase 3: Puzzle Chain
 **Goal**: The complete puzzle sequence works end-to-end -- from broken ticket machine to Manager stamping Form 27-B -- gating progression so the player cannot skip steps
@@ -87,6 +87,6 @@ Phases execute in numeric order: 1 -> 2 -> 3 -> 4
 | Phase | Plans Complete | Status | Completed |
 |-------|---------------|--------|-----------|
 | 1. Engine Systems | 3/3 | Complete | 2026-01-29 |
-| 2. World Building | 0/2 | Not started | - |
+| 2. World Building | 2/2 | Complete | 2026-01-29 |
 | 3. Puzzle Chain | 0/1 | Not started | - |
 | 4. Art and Audio | 0/2 | Not started | - |

@@ -35,20 +35,20 @@
 
 ### Scenes
 
-- [ ] **SCN-01**: Title screen with game name and "New Game" button
-- [ ] **SCN-02**: Waiting Room — starting area with ticket machine, exit to Front Desk
-- [ ] **SCN-03**: Front Desk — Clerk NPC, exits to Waiting Room, Break Room, Filing Room
-- [ ] **SCN-04**: Break Room — vending machine, coffee machine, stamp location
-- [ ] **SCN-05**: Filing Room — filing cabinets, sentient cabinet NPC
-- [ ] **SCN-06**: Manager's Office — Manager NPC, final stamp interaction
-- [ ] **SCN-07**: Ending screen — congratulations, game complete
+- [x] **SCN-01**: Title screen with game name and "New Game" button
+- [x] **SCN-02**: Waiting Room — starting area with ticket machine, exit to Front Desk
+- [x] **SCN-03**: Front Desk — Clerk NPC, exits to Waiting Room, Break Room, Filing Room
+- [x] **SCN-04**: Break Room — vending machine, coffee machine, stamp location
+- [x] **SCN-05**: Filing Room — filing cabinets, sentient cabinet NPC
+- [x] **SCN-06**: Manager's Office — Manager NPC, final stamp interaction
+- [x] **SCN-07**: Ending screen — congratulations, game complete
 
 ### Content
 
-- [ ] **CNT-01**: Each hotspot has an examine description (flavor text)
-- [ ] **CNT-02**: Each NPC has personality reflected in dialogue (Clerk: bored, Cabinet: grumpy, Manager: cheerful)
-- [ ] **CNT-03**: Morgan has sarcastic internal monologue for examine actions
-- [ ] **CNT-04**: Game has dry humor throughout (afterlife bureaucracy jokes)
+- [x] **CNT-01**: Each hotspot has an examine description (flavor text)
+- [x] **CNT-02**: Each NPC has personality reflected in dialogue (Clerk: bored, Cabinet: grumpy, Manager: cheerful)
+- [x] **CNT-03**: Morgan has sarcastic internal monologue for examine actions
+- [x] **CNT-04**: Game has dry humor throughout (afterlife bureaucracy jokes)
 
 ### Audio
 
@@ -105,17 +105,17 @@
 | PZL-02 | Phase 3 | Pending |
 | PZL-03 | Phase 3 | Pending |
 | PZL-04 | Phase 3 | Pending |
-| SCN-01 | Phase 2 | Pending |
-| SCN-02 | Phase 2 | Pending |
-| SCN-03 | Phase 2 | Pending |
-| SCN-04 | Phase 2 | Pending |
-| SCN-05 | Phase 2 | Pending |
-| SCN-06 | Phase 2 | Pending |
-| SCN-07 | Phase 2 | Pending |
-| CNT-01 | Phase 2 | Pending |
-| CNT-02 | Phase 2 | Pending |
-| CNT-03 | Phase 2 | Pending |
-| CNT-04 | Phase 2 | Pending |
+| SCN-01 | Phase 2 | Complete |
+| SCN-02 | Phase 2 | Complete |
+| SCN-03 | Phase 2 | Complete |
+| SCN-04 | Phase 2 | Complete |
+| SCN-05 | Phase 2 | Complete |
+| SCN-06 | Phase 2 | Complete |
+| SCN-07 | Phase 2 | Complete |
+| CNT-01 | Phase 2 | Complete |
+| CNT-02 | Phase 2 | Complete |
+| CNT-03 | Phase 2 | Complete |
+| CNT-04 | Phase 2 | Complete |
 | AUD-01 | Phase 4 | Pending |
 | AUD-02 | Phase 4 | Pending |
 | ART-01 | Phase 4 | Pending |
