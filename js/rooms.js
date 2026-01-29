@@ -26,7 +26,7 @@
           width: 12,
           height: 35,
           label: 'Ticket Machine',
-          onInteract: 'A broken take-a-number machine.',
+          onInteract: "A take-a-number machine. It's jammed. Even in death, the machines don't work.",
           acceptsItem: null
         },
         {
@@ -37,7 +37,7 @@
           width: 12,
           height: 18,
           label: 'Motivational Poster',
-          onInteract: 'A poster.'
+          onInteract: "A motivational poster reads 'Hang in there!' Underneath, someone scrawled 'for eternity.'"
         },
         {
           id: 'poster-2',
@@ -47,7 +47,7 @@
           width: 10,
           height: 15,
           label: 'Another Poster',
-          onInteract: 'Another poster.'
+          onInteract: "'Every day is a gift!' ...The return policy here is terrible though."
         },
         {
           id: 'waiting-chairs',
@@ -57,7 +57,7 @@
           width: 25,
           height: 25,
           label: 'Waiting Chairs',
-          onInteract: 'Plastic chairs.'
+          onInteract: "Plastic chairs bolted to the floor. At least I can't feel my legs anymore. Wait, can I?"
         },
         {
           id: 'water-cooler',
@@ -67,7 +67,7 @@
           width: 8,
           height: 30,
           label: 'Water Cooler',
-          onInteract: 'A water cooler.'
+          onInteract: 'The water cooler is empty. Figures. Even the water moved on before I did.'
         },
         {
           id: 'exit-front-desk',
@@ -105,7 +105,7 @@
           width: 8,
           height: 8,
           label: 'Service Bell',
-          onInteract: 'A bell.'
+          onInteract: 'A service bell. I ring it. Nothing happens. I ring it again. Still nothing. Truly, this is the afterlife.'
         },
         {
           id: 'next-sign',
@@ -115,7 +115,7 @@
           width: 20,
           height: 10,
           label: '"NEXT" Sign',
-          onInteract: 'A sign.'
+          onInteract: "A neon 'NEXT' sign that's been stuck on the same number since 1987. Comforting."
         },
         {
           id: 'paperwork-pile',
@@ -125,7 +125,7 @@
           width: 15,
           height: 20,
           label: 'Pile of Paperwork',
-          onInteract: 'Paperwork.'
+          onInteract: 'A mountain of paperwork that would give a living person a heart attack. Good thing that ship has sailed.'
         },
         {
           id: 'exit-waiting',
@@ -183,7 +183,19 @@
           width: 12,
           height: 30,
           label: 'Coffee Machine',
-          onInteract: 'A coffee machine.'
+          onInteract: "A coffee machine that apparently dispenses 'existential dread' in three flavors. I'll take a dark roast."
+        },
+        {
+          id: 'coffee-mug',
+          type: 'pickup',
+          x: 20,
+          y: 50,
+          width: 6,
+          height: 8,
+          label: 'Coffee Mug',
+          itemId: 'coffee-mug',
+          itemDescription: "A mug that says 'I Survived the Afterlife and All I Got Was This Lousy Mug.' Classic.",
+          itemIcon: null
         },
         {
           id: 'vending-machine',
@@ -193,7 +205,7 @@
           width: 15,
           height: 45,
           label: 'Vending Machine',
-          onInteract: 'A vending machine.',
+          onInteract: "A vending machine. Something's stuck behind the glass. The afterlife really is just one big metaphor.",
           acceptsItem: null
         },
         {
@@ -204,7 +216,7 @@
           width: 25,
           height: 25,
           label: 'Break Table',
-          onInteract: 'A table.'
+          onInteract: 'A break table covered in coffee rings and centuries of despair. So, a regular break table.'
         },
         {
           id: 'lost-found-box',
@@ -214,7 +226,7 @@
           width: 12,
           height: 18,
           label: 'Lost & Found Box',
-          onInteract: 'A box.'
+          onInteract: "A Lost and Found box. 'Lost: my will to live. Found: irony.'"
         },
         {
           id: 'rubber-stamp',
@@ -225,7 +237,7 @@
           height: 6,
           label: 'Rubber Stamp',
           itemId: 'rubber-stamp',
-          itemDescription: 'An official-looking rubber stamp.',
+          itemDescription: "An official rubber stamp. Property of the Manager's Office. Probably shouldn't have been in the Lost and Found.",
           itemIcon: null
         },
         {
@@ -264,7 +276,7 @@
           width: 15,
           height: 60,
           label: 'Filing Cabinets (Left)',
-          onInteract: 'Cabinets.'
+          onInteract: "Rows and rows of filing cabinets. Each one holds someone's entire existence. Mine's probably misfiled under 'G' for 'Gray' or 'Grievous Accident.'"
         },
         {
           id: 'cabinet-row-right',
@@ -274,7 +286,7 @@
           width: 15,
           height: 60,
           label: 'Filing Cabinets (Right)',
-          onInteract: 'Cabinets.'
+          onInteract: "More filing cabinets. These ones are labeled 'H through N.' I wonder if they're all this chatty."
         },
         {
           id: 'dusty-floor',
@@ -284,7 +296,7 @@
           width: 40,
           height: 15,
           label: 'Dusty Floor',
-          onInteract: 'The floor.'
+          onInteract: 'The floor is covered in a fine layer of dust. At least something here has settled.'
         },
         {
           id: 'exit-front-desk',
@@ -322,7 +334,7 @@
           width: 30,
           height: 20,
           label: "Manager's Desk",
-          onInteract: 'A desk.'
+          onInteract: "A desk covered in motivational tchotchkes and a '#1 Boss' mug. Someone drank the Kool-Aid. And then died. And then kept drinking it."
         },
         {
           id: 'motivational-plaque',
@@ -332,7 +344,7 @@
           width: 12,
           height: 12,
           label: 'Motivational Plaque',
-          onInteract: 'A plaque.'
+          onInteract: "A plaque reads 'Every Soul Counts!' with a tally mark system. There are... a lot of tally marks."
         },
         {
           id: 'potted-plant',
@@ -342,7 +354,7 @@
           width: 10,
           height: 25,
           label: 'Potted Plant',
-          onInteract: 'A plant.'
+          onInteract: "A fake potted plant. Even the plants here aren't alive. I'd say that's poetic if it weren't so on the nose."
         },
         {
           id: 'exit-front-desk',
