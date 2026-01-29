@@ -33,6 +33,11 @@
           container.appendChild(hotspot);
         });
       }
+
+      // Apply visibility gating from game state
+      if (Game.onSceneRender) {
+        Game.onSceneRender(sceneId);
+      }
     },
 
     // Create a hotspot element

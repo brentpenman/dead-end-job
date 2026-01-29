@@ -19,6 +19,18 @@
       background: '#2a3a2a',
       hotspots: [
         {
+          id: 'bent-paperclip',
+          type: 'pickup',
+          x: 48,
+          y: 72,
+          width: 5,
+          height: 6,
+          label: 'Bent Paperclip',
+          itemId: 'bent-paperclip',
+          itemDescription: "A bent paperclip. Somebody's been stress-fiddling. Can't blame them -- eternity is long.",
+          itemIcon: null
+        },
+        {
           id: 'ticket-machine',
           type: 'use',
           x: 65,
@@ -27,7 +39,10 @@
           height: 35,
           label: 'Ticket Machine',
           onInteract: "A take-a-number machine. It's jammed. Even in death, the machines don't work.",
-          acceptsItem: null
+          acceptsItem: 'bent-paperclip',
+          useItemText: "I jam the paperclip into the mechanism and... *CLUNK*. It spits out a number. 2,147,483,647. Lucky me.",
+          wrongItemText: "That's not going to unjam a ticket machine.",
+          onUseItem: function() { Game.setFlag('hasTicketNumber', true); }
         },
         {
           id: 'poster-1',
@@ -238,7 +253,8 @@
           label: 'Rubber Stamp',
           itemId: 'rubber-stamp',
           itemDescription: "An official rubber stamp. Property of the Manager's Office. Probably shouldn't have been in the Lost and Found.",
-          itemIcon: null
+          itemIcon: null,
+          visibleWhen: { hasFlag: 'clerkSentToManager' }
         },
         {
           id: 'exit-front-desk',

@@ -227,6 +227,37 @@
       setTimeout(function() {
         self.showEndingScreen();
       }, 400);
+    },
+
+    // Scene render hook for visibility gating
+    onSceneRender: function(sceneId) {
+      // Hide hotspots based on puzzle state
+      var container = document.getElementById('scene-container');
+      var hotspots = container.querySelectorAll('.hotspot');
+
+      hotspots.forEach(function(el) {
+        var data = el._hotspotData;
+        if (!data) return;
+
+        // Check visibleWhen condition
+        if (data.visibleWhen) {
+          var visible = true;
+          if (data.visibleWhen.hasFlag) {
+            visible = !!Game.getFlag(data.visibleWhen.hasFlag);
+          }
+          if (data.visibleWhen.notFlag) {
+            visible = !Game.getFlag(data.visibleWhen.notFlag);
+          }
+          if (!visible) {
+            el.style.display = 'none';
+          }
+        }
+
+        // Hide pickup hotspots for items already in inventory
+        if (data.type === 'pickup' && data.itemId && Game.hasItem(data.itemId)) {
+          el.style.display = 'none';
+        }
+      });
     }
   };
 
