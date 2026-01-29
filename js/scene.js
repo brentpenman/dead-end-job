@@ -146,7 +146,7 @@
       hotspot.style.zIndex = zIndexMap[data.type] || 1;
 
       // Apply type-specific cursor class directly on the hotspot
-      var cursorMode = Scene.getCursorModeForHotspot(data.type);
+      var cursorMode = data.cursorStyle || Scene.getCursorModeForHotspot(data.type);
       // Use appropriate cursor for exit type and position
       if (data.type === 'exit') {
         if (data.exitStyle === 'door') {

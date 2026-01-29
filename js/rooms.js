@@ -23,6 +23,7 @@
         {
           id: 'bent-paperclip',
           type: 'pickup',
+          cursorStyle: 'look',
           x: 29.27,
           y: 80.81,
           width: 4.8,
