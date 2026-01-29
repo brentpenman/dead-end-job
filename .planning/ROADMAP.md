@@ -30,8 +30,8 @@ Build a complete point-and-click adventure game in four phases: first the core e
 **Plans**: 3 plans
 
 Plans:
-- [ ] 01-01: Scene engine -- rendering, hotspots, cursor modes, room navigation, transitions
-- [ ] 01-02: Inventory system -- pickup, inventory bar, item selection, use-on-hotspot, examine, item removal
+- [x] 01-01: Scene engine -- rendering, hotspots, cursor modes, room navigation, transitions
+- [x] 01-02: Inventory system -- pickup, inventory bar, item selection, use-on-hotspot, examine, item removal
 - [ ] 01-03: Dialogue system -- dialogue box, branching choices, NPC portraits, state-aware options, exit
 
 ### Phase 2: World Building
@@ -86,7 +86,7 @@ Phases execute in numeric order: 1 -> 2 -> 3 -> 4
 
 | Phase | Plans Complete | Status | Completed |
 |-------|---------------|--------|-----------|
-| 1. Engine Systems | 0/3 | Not started | - |
+| 1. Engine Systems | 2/3 | In progress | - |
 | 2. World Building | 0/2 | Not started | - |
 | 3. Puzzle Chain | 0/1 | Not started | - |
 | 4. Art and Audio | 0/2 | Not started | - |

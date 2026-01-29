@@ -10,28 +10,28 @@ See: .planning/PROJECT.md (updated 2026-01-29)
 ## Current Position
 
 Phase: 1 of 4 (Engine Systems)
-Plan: 1 of 3 in current phase
+Plan: 2 of 3 in current phase
 Status: In progress
-Last activity: 2026-01-29 -- Completed 01-01-PLAN.md
+Last activity: 2026-01-29 -- Completed 01-02-PLAN.md
 
-Progress: [█░░░░░░░░░] 12.5% (1/8 plans)
+Progress: [██░░░░░░░░] 25.0% (2/8 plans)
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 1
+- Total plans completed: 2
 - Average duration: 2min
-- Total execution time: 0.03 hours
+- Total execution time: 0.07 hours
 
 **By Phase:**
 
 | Phase | Plans | Total | Avg/Plan |
 |-------|-------|-------|----------|
-| 1 | 1/3 | 2min | 2min |
+| 1 | 2/3 | 4min | 2min |
 
 **Recent Trend:**
-- Last 5 plans: 01-01 (2min)
-- Trend: Starting Phase 1
+- Last 5 plans: 01-01 (2min), 01-02 (2min)
+- Trend: Consistent velocity in Phase 1
 
 *Updated after each plan completion*
 
@@ -48,6 +48,10 @@ Recent decisions affecting current work:
 - 01-01: Graceful degradation for talk/pickup/use until systems built
 - 01-01: CSS cursor property for Phase 1, custom icons deferred to Phase 4
 - 01-01: 400ms fade transition, 3-second text feedback auto-fade
+- 01-02: Scene click checks selected item FIRST (use-on-anything pattern)
+- 01-02: Right-click inventory items for examine
+- 01-02: Item icons use emoji or first-letter fallback
+- 01-02: Use-on-hotspot removes item only on success
 
 ### Pending Todos
 
@@ -59,6 +63,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-01-29 12:35 UTC
-Stopped at: Completed 01-01-PLAN.md (Scene Engine Foundation)
+Last session: 2026-01-29 17:43 UTC
+Stopped at: Completed 01-02-PLAN.md (Inventory System)
 Resume file: None
