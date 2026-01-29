@@ -89,18 +89,18 @@
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| ENG-01 | Phase 1 | Pending |
-| ENG-02 | Phase 1 | Pending |
-| ENG-03 | Phase 1 | Pending |
-| ENG-04 | Phase 1 | Pending |
-| INV-01 | Phase 1 | Pending |
-| INV-02 | Phase 1 | Pending |
-| INV-03 | Phase 1 | Pending |
-| INV-04 | Phase 1 | Pending |
-| DLG-01 | Phase 1 | Pending |
-| DLG-02 | Phase 1 | Pending |
-| DLG-03 | Phase 1 | Pending |
-| DLG-04 | Phase 1 | Pending |
+| ENG-01 | Phase 1 | Complete |
+| ENG-02 | Phase 1 | Complete |
+| ENG-03 | Phase 1 | Complete |
+| ENG-04 | Phase 1 | Complete |
+| INV-01 | Phase 1 | Complete |
+| INV-02 | Phase 1 | Complete |
+| INV-03 | Phase 1 | Complete |
+| INV-04 | Phase 1 | Complete |
+| DLG-01 | Phase 1 | Complete |
+| DLG-02 | Phase 1 | Complete |
+| DLG-03 | Phase 1 | Complete |
+| DLG-04 | Phase 1 | Complete |
 | PZL-01 | Phase 3 | Pending |
 | PZL-02 | Phase 3 | Pending |
 | PZL-03 | Phase 3 | Pending |
