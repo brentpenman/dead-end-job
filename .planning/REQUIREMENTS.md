@@ -97,25 +97,25 @@
 | INV-02 | Phase 1 | Pending |
 | INV-03 | Phase 1 | Pending |
 | INV-04 | Phase 1 | Pending |
-| DLG-01 | Phase 2 | Pending |
-| DLG-02 | Phase 2 | Pending |
-| DLG-03 | Phase 2 | Pending |
-| DLG-04 | Phase 2 | Pending |
+| DLG-01 | Phase 1 | Pending |
+| DLG-02 | Phase 1 | Pending |
+| DLG-03 | Phase 1 | Pending |
+| DLG-04 | Phase 1 | Pending |
 | PZL-01 | Phase 3 | Pending |
 | PZL-02 | Phase 3 | Pending |
 | PZL-03 | Phase 3 | Pending |
 | PZL-04 | Phase 3 | Pending |
-| SCN-01 | Phase 4 | Pending |
-| SCN-02 | Phase 3 | Pending |
-| SCN-03 | Phase 3 | Pending |
-| SCN-04 | Phase 3 | Pending |
-| SCN-05 | Phase 3 | Pending |
-| SCN-06 | Phase 3 | Pending |
-| SCN-07 | Phase 4 | Pending |
-| CNT-01 | Phase 3 | Pending |
-| CNT-02 | Phase 3 | Pending |
-| CNT-03 | Phase 3 | Pending |
-| CNT-04 | Phase 3 | Pending |
+| SCN-01 | Phase 2 | Pending |
+| SCN-02 | Phase 2 | Pending |
+| SCN-03 | Phase 2 | Pending |
+| SCN-04 | Phase 2 | Pending |
+| SCN-05 | Phase 2 | Pending |
+| SCN-06 | Phase 2 | Pending |
+| SCN-07 | Phase 2 | Pending |
+| CNT-01 | Phase 2 | Pending |
+| CNT-02 | Phase 2 | Pending |
+| CNT-03 | Phase 2 | Pending |
+| CNT-04 | Phase 2 | Pending |
 | AUD-01 | Phase 4 | Pending |
 | AUD-02 | Phase 4 | Pending |
 | ART-01 | Phase 4 | Pending |
@@ -126,10 +126,10 @@
 | ART-06 | Phase 4 | Pending |
 
 **Coverage:**
-- v1 requirements: 33 total
-- Mapped to phases: 33
+- v1 requirements: 35 total
+- Mapped to phases: 35
 - Unmapped: 0
 
 ---
 *Requirements defined: 2026-01-29*
-*Last updated: 2026-01-29 after initial definition*
+*Last updated: 2026-01-29 after roadmap creation*
