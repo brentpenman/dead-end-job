@@ -140,6 +140,8 @@
       var overlay = document.createElement('div');
       overlay.className = 'title-overlay';
 
+      overlay.style.background = 'radial-gradient(ellipse at center, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.85) 100%)';
+
       var title = document.createElement('h1');
       title.textContent = 'Dead End Job';
 
@@ -172,6 +174,7 @@
       var container = document.getElementById('scene-container');
       var overlay = document.createElement('div');
       overlay.className = 'ending-overlay';
+      overlay.style.background = 'radial-gradient(ellipse at center, rgba(255,200,50,0.15) 0%, rgba(0,0,0,0.7) 100%)';
 
       var title = document.createElement('h1');
       title.textContent = 'FORM 27-B: APPROVED';

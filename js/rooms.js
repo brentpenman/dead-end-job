@@ -9,6 +9,7 @@
       id: 'title-screen',
       name: 'Dead End Job',
       background: '#1a1a2e',
+      backgroundImage: 'images/title-screen.png',
       hotspots: [],
       isTitle: true
     },
@@ -17,6 +18,7 @@
       id: 'waiting-room',
       name: 'Waiting Room',
       background: '#2a3a2a',
+      backgroundImage: 'images/waiting-room.png',
       hotspots: [
         {
           id: 'bent-paperclip',
@@ -28,7 +30,7 @@
           label: 'Bent Paperclip',
           itemId: 'bent-paperclip',
           itemDescription: "A bent paperclip. Somebody's been stress-fiddling. Can't blame them -- eternity is long.",
-          itemIcon: null
+          itemIcon: 'data:image/svg+xml,' + encodeURIComponent('<svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg"><path d="M12 8C12 5 16 5 16 8L16 28C16 33 24 33 24 28L24 12C24 9 20 9 20 12L20 26" fill="none" stroke="#9ca3af" stroke-width="2.5" stroke-linecap="round"/></svg>')
         },
         {
           id: 'ticket-machine',
@@ -101,6 +103,7 @@
       id: 'front-desk',
       name: 'Front Desk',
       background: '#3a2a2a',
+      backgroundImage: 'images/front-desk.png',
       hotspots: [
         {
           id: 'clerk-npc',
@@ -189,6 +192,7 @@
       id: 'break-room',
       name: 'Break Room',
       background: '#2a2a3a',
+      backgroundImage: 'images/break-room.png',
       hotspots: [
         {
           id: 'coffee-machine',
@@ -210,7 +214,7 @@
           label: 'Coffee Mug',
           itemId: 'coffee-mug',
           itemDescription: "A mug that says 'I Survived the Afterlife and All I Got Was This Lousy Mug.' Classic.",
-          itemIcon: null
+          itemIcon: 'data:image/svg+xml,' + encodeURIComponent('<svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg"><rect x="8" y="14" width="18" height="20" rx="3" fill="#d4a574"/><rect x="26" y="18" width="8" height="10" rx="4" fill="none" stroke="#d4a574" stroke-width="2.5"/><path d="M10 14Q12 8 17 10Q22 6 24 14" fill="none" stroke="#e5e7eb" stroke-width="1.5" stroke-linecap="round" opacity="0.6"/></svg>')
         },
         {
           id: 'vending-machine',
@@ -253,7 +257,7 @@
           label: 'Rubber Stamp',
           itemId: 'rubber-stamp',
           itemDescription: "An official rubber stamp. Property of the Manager's Office. Probably shouldn't have been in the Lost and Found.",
-          itemIcon: null,
+          itemIcon: 'data:image/svg+xml,' + encodeURIComponent('<svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg"><rect x="12" y="6" width="16" height="14" rx="3" fill="#7c3aed"/><rect x="16" y="14" width="8" height="8" fill="#6d28d9"/><rect x="6" y="28" width="28" height="8" rx="2" fill="#4c1d95"/><rect x="10" y="22" width="20" height="6" rx="1" fill="#5b21b6"/></svg>'),
           visibleWhen: { hasFlag: 'clerkSentToManager' }
         },
         {
@@ -273,6 +277,7 @@
       id: 'filing-room',
       name: 'Filing Room',
       background: '#3a3a2a',
+      backgroundImage: 'images/filing-room.png',
       hotspots: [
         {
           id: 'cabinet-npc',
@@ -331,6 +336,7 @@
       id: 'manager-office',
       name: "Manager's Office",
       background: '#2e2a3e',
+      backgroundImage: 'images/manager-office.png',
       hotspots: [
         {
           id: 'manager-npc',
@@ -389,6 +395,7 @@
       id: 'ending-screen',
       name: 'The End',
       background: '#1a2e1a',
+      backgroundImage: 'images/ending-scene.png',
       hotspots: [],
       isEnding: true
     }

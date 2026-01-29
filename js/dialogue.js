@@ -168,9 +168,26 @@
       var npcName = document.getElementById('dialogue-npc-name');
       npcName.textContent = tree.npcName;
 
-      // Set portrait placeholder
-      var placeholder = document.getElementById('dialogue-portrait-placeholder');
-      placeholder.textContent = tree.npcName.charAt(0).toUpperCase();
+      // Set portrait
+      var portraitContainer = document.querySelector('.dialogue-portrait');
+      if (tree.portraitSVG) {
+        var placeholder = document.getElementById('dialogue-portrait-placeholder');
+        if (placeholder) placeholder.style.display = 'none';
+        // Remove any existing portrait image
+        var existingImg = portraitContainer.querySelector('img');
+        if (existingImg) existingImg.remove();
+        var img = document.createElement('img');
+        img.src = 'data:image/svg+xml,' + encodeURIComponent(tree.portraitSVG);
+        img.width = 80;
+        img.height = 80;
+        portraitContainer.appendChild(img);
+      } else {
+        var placeholder = document.getElementById('dialogue-portrait-placeholder');
+        if (placeholder) {
+          placeholder.style.display = '';
+          placeholder.textContent = tree.npcName.charAt(0).toUpperCase();
+        }
+      }
 
       // Clear choices during typing
       var choicesContainer = document.getElementById('dialogue-choices');

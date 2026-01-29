@@ -92,7 +92,13 @@
       // Create icon
       var icon = document.createElement('div');
       icon.className = 'item-icon';
-      if (item.icon) {
+      if (item.icon && item.icon.indexOf('data:image') === 0) {
+        var img = document.createElement('img');
+        img.src = item.icon;
+        img.width = 40;
+        img.height = 40;
+        icon.appendChild(img);
+      } else if (item.icon) {
         icon.textContent = item.icon;
       } else {
         // Fallback: first letter in a circle
