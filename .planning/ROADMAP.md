@@ -10,7 +10,7 @@ Build a complete point-and-click adventure game in four phases: first the core e
 - Integer phases (1, 2, 3, 4): Planned milestone work
 - Decimal phases (e.g., 2.1): Urgent insertions (marked with INSERTED)
 
-- [ ] **Phase 1: Engine Systems** - Scene rendering, inventory mechanics, and dialogue system
+- [x] **Phase 1: Engine Systems** - Scene rendering, inventory mechanics, and dialogue system
 - [ ] **Phase 2: World Building** - All rooms, NPCs, hotspots, and written content
 - [ ] **Phase 3: Puzzle Chain** - The three inventory puzzles wired into a gated progression
 - [ ] **Phase 4: Art and Audio** - Gemini images, cursor icons, inventory sprites, music, sound effects
@@ -32,7 +32,7 @@ Build a complete point-and-click adventure game in four phases: first the core e
 Plans:
 - [x] 01-01: Scene engine -- rendering, hotspots, cursor modes, room navigation, transitions
 - [x] 01-02: Inventory system -- pickup, inventory bar, item selection, use-on-hotspot, examine, item removal
-- [ ] 01-03: Dialogue system -- dialogue box, branching choices, NPC portraits, state-aware options, exit
+- [x] 01-03: Dialogue system -- dialogue box, branching choices, NPC portraits, state-aware options, exit
 
 ### Phase 2: World Building
 **Goal**: All five game rooms exist with their hotspots, all three NPCs have personality-driven dialogue, and every examinable object has flavor text
@@ -86,7 +86,7 @@ Phases execute in numeric order: 1 -> 2 -> 3 -> 4
 
 | Phase | Plans Complete | Status | Completed |
 |-------|---------------|--------|-----------|
-| 1. Engine Systems | 2/3 | In progress | - |
+| 1. Engine Systems | 3/3 | Complete | 2026-01-29 |
 | 2. World Building | 0/2 | Not started | - |
 | 3. Puzzle Chain | 0/1 | Not started | - |
 | 4. Art and Audio | 0/2 | Not started | - |
