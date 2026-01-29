@@ -5,33 +5,34 @@
 See: .planning/PROJECT.md (updated 2026-01-29)
 
 **Core value:** The game must feel like a real point-and-click adventure -- explorable scenes, inventory puzzles, witty dialogue trees, and a satisfying short story arc.
-**Current focus:** Phase 1 - Engine Systems
+**Current focus:** Phase 2 - World Building
 
 ## Current Position
 
-Phase: 1 of 4 (Engine Systems)
-Plan: 3 of 3 in current phase
-Status: Phase complete
-Last activity: 2026-01-29 -- Completed 01-03-PLAN.md
+Phase: 2 of 4 (World Building)
+Plan: 1 of 2 in current phase
+Status: In progress
+Last activity: 2026-01-29 -- Completed 02-01-PLAN.md
 
-Progress: [███░░░░░░░] 37.5% (3/8 plans)
+Progress: [████░░░░░░] 50% (4/8 plans)
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 3
+- Total plans completed: 4
 - Average duration: 2min
-- Total execution time: 0.12 hours
+- Total execution time: 0.15 hours
 
 **By Phase:**
 
 | Phase | Plans | Total | Avg/Plan |
 |-------|-------|-------|----------|
 | 1 | 3/3 | 7min | 2min |
+| 2 | 1/2 | 2min | 2min |
 
 **Recent Trend:**
-- Last 5 plans: 01-01 (2min), 01-02 (2min), 01-03 (3min)
-- Trend: Phase 1 complete - consistent velocity
+- Last 5 plans: 01-01 (2min), 01-02 (2min), 01-03 (3min), 02-01 (2min)
+- Trend: Consistent 2-3min velocity across phases
 
 *Updated after each plan completion*
 
@@ -57,6 +58,10 @@ Recent decisions affecting current work:
 - 01-03: Portrait placeholder uses colored circle with NPC initial
 - 01-03: Dialogue blocks hotspot interaction via Game.dialogueOpen flag
 - 01-03: Conditional choices use object syntax: {hasItem, hasFlag, notFlag}
+- 02-01: Title/ending screens use overlay divs with isTitle/isEnding flags
+- 02-01: Front Desk as central hub connecting all other rooms
+- 02-01: Placeholder examine text (1 sentence) - Plan 02-02 adds full content
+- 02-01: Rubber stamp pickup exists but Phase 3 will add visibility gating
 
 ### Pending Todos
 
@@ -68,6 +73,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-01-29 12:44 UTC
-Stopped at: Completed 01-03-PLAN.md (Dialogue System)
+Last session: 2026-01-29 13:04 UTC
+Stopped at: Completed 02-01-PLAN.md (World Building Foundation)
 Resume file: None
