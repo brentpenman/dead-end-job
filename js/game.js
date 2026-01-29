@@ -28,6 +28,11 @@
         Dialogue.init();
       }
 
+      // Register all NPC dialogues
+      if (typeof Dialogues !== 'undefined' && Dialogues.registerAll) {
+        Dialogues.registerAll();
+      }
+
       // Show title screen if on title scene
       var currentScene = this.getScene();
       if (currentScene && currentScene.isTitle) {
