@@ -5,21 +5,21 @@
 See: .planning/PROJECT.md (updated 2026-01-29)
 
 **Core value:** The game must feel like a real point-and-click adventure -- explorable scenes, inventory puzzles, witty dialogue trees, and a satisfying short story arc.
-**Current focus:** Phase 2 complete - ready for Phase 3
+**Current focus:** Phase 3 in progress - puzzle chain implementation
 
 ## Current Position
 
-Phase: 2 of 4 (World Building)
-Plan: 2 of 2 in current phase
-Status: Phase complete, verified ✓
-Last activity: 2026-01-29 -- Phase 2 verified (11/11 must-haves passed)
+Phase: 3 of 4 (Puzzle Chain)
+Plan: 1 of 1 in current phase
+Status: Phase complete, pending verification
+Last activity: 2026-01-29 -- Completed 03-01-PLAN.md (puzzle implementation)
 
-Progress: [██████░░░░] 62.5% (5/8 plans)
+Progress: [███████░░░] 75% (6/8 plans)
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 5
+- Total plans completed: 6
 - Average duration: 2min
 - Total execution time: 0.2 hours
 
@@ -29,9 +29,10 @@ Progress: [██████░░░░] 62.5% (5/8 plans)
 |-------|-------|-------|----------|
 | 1 | 3/3 | 7min | 2min |
 | 2 | 2/2 | 5min | 2.5min |
+| 3 | 1/1 | 2min | 2min |
 
 **Recent Trend:**
-- Last 5 plans: 01-02 (2min), 01-03 (3min), 02-01 (2min), 02-02 (3min)
+- Last 5 plans: 01-03 (3min), 02-01 (2min), 02-02 (3min), 03-01 (2min)
 - Trend: Consistent 2-3min velocity across phases
 
 *Updated after each plan completion*
@@ -67,6 +68,10 @@ Recent decisions affecting current work:
 - 02-02: Manager personality - relentlessly cheerful corporate motivator (exclamation marks, puns)
 - 02-02: Morgan's voice - dry sarcasm, copes with death through dark humor, first-person POV
 - 02-02: All examine text references afterlife/bureaucracy theme consistently
+- 03-01: visibleWhen property for hotspot visibility gating (data-driven, extensible)
+- 03-01: Manager stamp-form gates on hasItem rubber-stamp (simpler than readyToStamp flag)
+- 03-01: Items consumed during stamping sequence (form-27b and rubber-stamp removed)
+- 03-01: triggerEnding as dialogue action type (dialogue can trigger game state transitions)
 
 ### Pending Todos
 
@@ -78,6 +83,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-01-29 13:15 UTC
-Stopped at: Phase 2 verified and complete
+Last session: 2026-01-29 18:34 UTC
+Stopped at: Completed 03-01-PLAN.md (puzzle implementation)
 Resume file: None

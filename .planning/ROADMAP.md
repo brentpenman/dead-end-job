@@ -12,7 +12,7 @@ Build a complete point-and-click adventure game in four phases: first the core e
 
 - [x] **Phase 1: Engine Systems** - Scene rendering, inventory mechanics, and dialogue system
 - [x] **Phase 2: World Building** - All rooms, NPCs, hotspots, and written content
-- [ ] **Phase 3: Puzzle Chain** - The three inventory puzzles wired into a gated progression
+- [x] **Phase 3: Puzzle Chain** - The three inventory puzzles wired into a gated progression
 - [ ] **Phase 4: Art and Audio** - Gemini images, cursor icons, inventory sprites, music, sound effects
 
 ## Phase Details
@@ -62,7 +62,7 @@ Plans:
 **Plans**: 1 plan
 
 Plans:
-- [ ] 03-01: Puzzle implementation -- wire all three puzzles (ticket machine, filing cabinet trade, stamp delivery), progression gating, ending trigger
+- [x] 03-01: Puzzle implementation -- wire all three puzzles (ticket machine, filing cabinet trade, stamp delivery), progression gating, ending trigger
 
 ### Phase 4: Art and Audio
 **Goal**: The game looks and sounds like a real point-and-click adventure with generated room backgrounds, character portraits, custom cursors, and ambient audio
@@ -88,5 +88,5 @@ Phases execute in numeric order: 1 -> 2 -> 3 -> 4
 |-------|---------------|--------|-----------|
 | 1. Engine Systems | 3/3 | Complete | 2026-01-29 |
 | 2. World Building | 2/2 | Complete | 2026-01-29 |
-| 3. Puzzle Chain | 0/1 | Not started | - |
+| 3. Puzzle Chain | 1/1 | Complete | 2026-01-29 |
 | 4. Art and Audio | 0/2 | Not started | - |
