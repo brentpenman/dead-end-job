@@ -13,7 +13,7 @@ Build a complete point-and-click adventure game in four phases: first the core e
 - [x] **Phase 1: Engine Systems** - Scene rendering, inventory mechanics, and dialogue system
 - [x] **Phase 2: World Building** - All rooms, NPCs, hotspots, and written content
 - [x] **Phase 3: Puzzle Chain** - The three inventory puzzles wired into a gated progression
-- [ ] **Phase 4: Art and Audio** - Gemini images, cursor icons, inventory sprites, music, sound effects
+- [x] **Phase 4: Art and Audio** - Gemini images, cursor icons, inventory sprites, music, sound effects
 
 ## Phase Details
 
@@ -73,11 +73,12 @@ Plans:
   2. NPC dialogue shows character portraits (Morgan, Clerk, Filing Cabinet) and the title/ending screens use generated art
   3. Cursor icons visually distinguish between look, use, and talk modes
   4. Background ambient music loops during gameplay and key interactions produce sound effects
-**Plans**: 2 plans
+**Plans**: 3 plans
 
 Plans:
-- [ ] 04-01: Art integration -- generate and apply room backgrounds, character portraits, title/ending art, inventory item icons, cursor icons
-- [ ] 04-02: Audio integration -- source and wire ambient music loop, interaction sound effects (pickup, door, dialogue open)
+- [x] 04-01: Gemini image generation -- generate 7 background images (title, 5 rooms, ending) via Gemini skill
+- [x] 04-02: Art integration -- wire Gemini backgrounds, SVG character portraits, custom cursor icons, inventory item SVG icons
+- [x] 04-03: Audio integration -- procedural ambient music, interaction sound effects (pickup, door, dialogue open)
 
 ## Progress
 
@@ -89,4 +90,4 @@ Phases execute in numeric order: 1 -> 2 -> 3 -> 4
 | 1. Engine Systems | 3/3 | Complete | 2026-01-29 |
 | 2. World Building | 2/2 | Complete | 2026-01-29 |
 | 3. Puzzle Chain | 1/1 | Complete | 2026-01-29 |
-| 4. Art and Audio | 0/2 | Not started | - |
+| 4. Art and Audio | 3/3 | Complete | 2026-01-29 |
