@@ -26,6 +26,31 @@
       }
       container.appendChild(background);
 
+      // Create scene elements (NPC sprites, decorations)
+      if (sceneData.sceneElements) {
+        sceneData.sceneElements.forEach(function(elemData) {
+          var elem = document.createElement('div');
+          elem.className = 'scene-element';
+          elem.style.position = 'absolute';
+          elem.style.left = elemData.x + '%';
+          elem.style.top = elemData.y + '%';
+          elem.style.width = elemData.width + '%';
+          elem.style.height = elemData.height + '%';
+          elem.style.pointerEvents = 'none';
+          elem.style.zIndex = '1';
+          if (elemData.svg) {
+            var img = document.createElement('img');
+            img.src = 'data:image/svg+xml,' + encodeURIComponent(elemData.svg);
+            img.style.width = '100%';
+            img.style.height = '100%';
+            img.style.objectFit = 'contain';
+            img.style.filter = 'drop-shadow(0 2px 4px rgba(0,0,0,0.5))';
+            elem.appendChild(img);
+          }
+          container.appendChild(elem);
+        });
+      }
+
       // Create hotspots
       if (sceneData.hotspots) {
         sceneData.hotspots.forEach(function(hotspotData) {
