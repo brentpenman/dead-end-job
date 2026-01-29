@@ -129,3 +129,46 @@ html, body {
 .cursor-exit {
   cursor: e-resize;
 }
+
+/* Title screen overlay */
+.title-overlay, .ending-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 5;
+  text-align: center;
+}
+
+.title-overlay h1, .ending-overlay h1 {
+  font-size: 48px;
+  color: #ffcc00;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+  margin-bottom: 16px;
+}
+
+.title-overlay p, .ending-overlay p {
+  font-size: 18px;
+  color: #ccc;
+  margin-bottom: 24px;
+  max-width: 500px;
+}
+
+.title-overlay button, .ending-overlay button {
+  padding: 14px 40px;
+  font-size: 20px;
+  background: #ffcc00;
+  color: #1a1a2e;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: transform 0.15s, background 0.15s;
+}
+
+.title-overlay button:hover, .ending-overlay button:hover {
+  background: #ffe066;
+  transform: scale(1.05);
+}

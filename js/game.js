@@ -5,7 +5,7 @@
   'use strict';
 
   var GameState = {
-    currentScene: 'test-room-a',
+    currentScene: 'title-screen',
     inventory: [],
     flags: {},
     scenes: {}
@@ -15,7 +15,7 @@
     // Initialize game
     init: function() {
       console.log('Game initializing...');
-      this.registerTestScenes();
+      this.registerRooms();
       Scene.render(GameState.currentScene);
 
       // Initialize inventory system if available
@@ -28,113 +28,24 @@
         Dialogue.init();
       }
 
+      // Show title screen if on title scene
+      var currentScene = this.getScene();
+      if (currentScene && currentScene.isTitle) {
+        this.showTitleScreen();
+      }
+
       console.log('Game initialized');
     },
 
-    // Register test scenes for Phase 1 verification
-    registerTestScenes: function() {
-      GameState.scenes['test-room-a'] = {
-        id: 'test-room-a',
-        name: 'Test Room A',
-        background: '#2a3a4a',
-        hotspots: [
-          {
-            id: 'exit-to-b',
-            type: 'exit',
-            x: 80,
-            y: 40,
-            width: 15,
-            height: 50,
-            target: 'test-room-b',
-            label: 'Door to Room B'
-          },
-          {
-            id: 'poster',
-            type: 'look',
-            x: 10,
-            y: 20,
-            width: 12,
-            height: 15,
-            label: 'Faded poster',
-            onInteract: 'A motivational poster reads: "Hang in there!"'
-          },
-          {
-            id: 'npc-bob',
-            type: 'talk',
-            x: 40,
-            y: 30,
-            width: 10,
-            height: 40,
-            label: 'Bob',
-            dialogueId: 'bob-intro'
-          },
-          {
-            id: 'key',
-            type: 'pickup',
-            x: 50,
-            y: 60,
-            width: 8,
-            height: 8,
-            label: 'Rusty Key',
-            itemId: 'rusty-key',
-            itemDescription: 'A rusty old key. Looks like it fits something.',
-            itemIcon: '🔑'
-          }
-        ]
-      };
-
-      GameState.scenes['test-room-b'] = {
-        id: 'test-room-b',
-        name: 'Test Room B',
-        background: '#4a2a3a',
-        hotspots: [
-          {
-            id: 'exit-to-a',
-            type: 'exit',
-            x: 5,
-            y: 40,
-            width: 15,
-            height: 50,
-            target: 'test-room-a',
-            label: 'Door to Room A'
-          },
-          {
-            id: 'window',
-            type: 'look',
-            x: 50,
-            y: 10,
-            width: 20,
-            height: 25,
-            label: 'Window',
-            onInteract: 'Through the grimy window, you see the city lights far below.'
-          },
-          {
-            id: 'coffee-cup',
-            type: 'pickup',
-            x: 70,
-            y: 60,
-            width: 8,
-            height: 10,
-            label: 'Coffee cup',
-            itemId: 'coffee-cup',
-            itemDescription: 'An old coffee cup with mysterious stains.',
-            itemIcon: '☕'
-          },
-          {
-            id: 'locked-box',
-            type: 'use',
-            x: 30,
-            y: 50,
-            width: 15,
-            height: 12,
-            label: 'Locked Box',
-            acceptsItem: 'rusty-key',
-            useItemText: 'The key fits! The box opens.',
-            wrongItemText: "That doesn't fit this lock.",
-            onInteract: 'A locked wooden box. Needs a key.'
-          }
-        ]
-      };
+    // Register all rooms from Rooms module
+    registerRooms: function() {
+      var allRooms = Rooms.getAll();
+      for (var id in allRooms) {
+        if (allRooms.hasOwnProperty(id)) {
+          GameState.scenes[id] = allRooms[id];
+        }
+      }
+      console.log('Registered', Object.keys(GameState.scenes).length, 'rooms');
     },
 
     // Scene transition
@@ -216,6 +127,101 @@
     // Get current scene ID
     getCurrentSceneId: function() {
       return GameState.currentScene;
+    },
+
+    // Show title screen overlay
+    showTitleScreen: function() {
+      var container = document.getElementById('scene-container');
+      var overlay = document.createElement('div');
+      overlay.className = 'title-overlay';
+
+      var title = document.createElement('h1');
+      title.textContent = 'Dead End Job';
+
+      var subtitle = document.createElement('p');
+      subtitle.textContent = 'A Pointless Adventure in the Afterlife';
+
+      var button = document.createElement('button');
+      button.textContent = 'New Game';
+      button.onclick = function() {
+        Game.startGame();
+      };
+
+      overlay.appendChild(title);
+      overlay.appendChild(subtitle);
+      overlay.appendChild(button);
+      container.appendChild(overlay);
+    },
+
+    // Start the game
+    startGame: function() {
+      var overlay = document.querySelector('.title-overlay');
+      if (overlay) {
+        overlay.remove();
+      }
+      this.changeScene('waiting-room');
+    },
+
+    // Show ending screen overlay
+    showEndingScreen: function() {
+      var container = document.getElementById('scene-container');
+      var overlay = document.createElement('div');
+      overlay.className = 'ending-overlay';
+
+      var title = document.createElement('h1');
+      title.textContent = 'FORM 27-B: APPROVED';
+
+      var p1 = document.createElement('p');
+      p1.textContent = "Congratulations! You've successfully navigated the Afterlife Processing Department.";
+
+      var p2 = document.createElement('p');
+      p2.textContent = 'Morgan Gray can finally move on... to whatever comes next.';
+
+      var button = document.createElement('button');
+      button.textContent = 'Play Again';
+      button.onclick = function() {
+        Game.restartGame();
+      };
+
+      overlay.appendChild(title);
+      overlay.appendChild(p1);
+      overlay.appendChild(p2);
+      overlay.appendChild(button);
+      container.appendChild(overlay);
+    },
+
+    // Restart the game
+    restartGame: function() {
+      var overlay = document.querySelector('.ending-overlay');
+      if (overlay) {
+        overlay.remove();
+      }
+
+      // Reset game state
+      GameState.inventory = [];
+      GameState.flags = {};
+      GameState.currentScene = 'title-screen';
+
+      // Re-render title screen
+      Scene.render('title-screen');
+
+      // Update inventory display if available
+      if (typeof Inventory !== 'undefined' && Inventory.render) {
+        Inventory.render();
+      }
+
+      this.showTitleScreen();
+    },
+
+    // Trigger ending sequence
+    triggerEnding: function() {
+      var self = this;
+      this.changeScene('ending-screen');
+
+      // Wait for scene transition to complete
+      setTimeout(function() {
+        self.showEndingScreen();
+      }, 400);
     }
   };
 
