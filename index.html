@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dead End Job</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/inventory.css">
+  <link rel="stylesheet" href="css/dialogue.css">
+</head>
+<body>
+  <div id="game-container">
+    <div id="scene-container"></div>
+    <div id="inventory-bar"></div>
+    <div id="dialogue-container"></div>
+    <div id="text-display"></div>
+  </div>
+
+  <script src="js/game.js"></script>
+  <script src="js/scene.js"></script>
+  <script src="js/cursor.js"></script>
+  <script src="js/inventory.js"></script>
+  <script src="js/dialogue.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      Game.init();
+    });
+  </script>
+</body>
+</html>
