@@ -1,0 +1,1124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dev Calibration Tool — Hotspot Position Editor</title>
+  <style>
+    *, html, body {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html, body {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background: #111118;
+      font-family: 'SF Mono', 'Consolas', 'Monaco', monospace;
+      color: #e0e0e0;
+      font-size: 13px;
+    }
+
+    #calibrate-container {
+      display: flex;
+      width: 100vw;
+      height: 100vh;
+    }
+
+    /* ─── Scene Selector Sidebar ─── */
+    #scene-selector {
+      width: 200px;
+      min-width: 200px;
+      background: #16161e;
+      border-right: 1px solid #2a2a35;
+      display: flex;
+      flex-direction: column;
+      overflow-y: auto;
+    }
+
+    #scene-selector h2 {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: #666;
+      padding: 14px 14px 8px;
+    }
+
+    .scene-btn {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 14px;
+      background: none;
+      border: none;
+      color: #999;
+      font-family: inherit;
+      font-size: 12px;
+      text-align: left;
+      cursor: pointer;
+      border-left: 3px solid transparent;
+      transition: all 0.15s;
+    }
+
+    .scene-btn:hover {
+      background: #1e1e28;
+      color: #ccc;
+    }
+
+    .scene-btn.active {
+      background: #1e1e2e;
+      color: #7aa2f7;
+      border-left-color: #7aa2f7;
+    }
+
+    .scene-btn.completed {
+      color: #9ece6a;
+    }
+
+    .scene-btn .scene-count {
+      margin-left: auto;
+      font-size: 10px;
+      color: #555;
+    }
+
+    .scene-btn.active .scene-count {
+      color: #5a7abf;
+    }
+
+    .scene-btn .scene-check {
+      color: #9ece6a;
+      font-size: 14px;
+    }
+
+    /* ─── Editor Area ─── */
+    #editor-area {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
+    }
+
+    /* ─── Image Wrapper (matches game rendering) ─── */
+    #image-wrapper {
+      flex: 1;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      background: #0d0d14;
+    }
+
+    #image-wrapper img.bg-image {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+      display: block;
+      pointer-events: none;
+      user-select: none;
+    }
+
+    #overlay {
+      position: absolute;
+      pointer-events: none;
+    }
+
+    /* Hotspot boxes on overlay */
+    .cal-hotspot {
+      position: absolute;
+      border: 1.5px dashed rgba(255, 255, 255, 0.15);
+      pointer-events: none;
+      transition: opacity 0.2s;
+    }
+
+    .cal-hotspot .cal-label {
+      position: absolute;
+      top: -16px;
+      left: 0;
+      font-size: 9px;
+      color: rgba(255, 255, 255, 0.3);
+      white-space: nowrap;
+      pointer-events: none;
+    }
+
+    .cal-hotspot.is-active {
+      border: 2px dashed #7aa2f7;
+      background: rgba(122, 162, 247, 0.08);
+      z-index: 10;
+    }
+
+    .cal-hotspot.is-active .cal-label {
+      color: #7aa2f7;
+      font-size: 10px;
+      font-weight: bold;
+    }
+
+    .cal-hotspot.is-confirmed {
+      border-color: rgba(158, 206, 106, 0.4);
+    }
+
+    .cal-hotspot.is-confirmed .cal-label {
+      color: rgba(158, 206, 106, 0.5);
+    }
+
+    .cal-hotspot.is-modified {
+      border-color: rgba(224, 175, 104, 0.5);
+    }
+
+    .cal-hotspot.is-modified .cal-label {
+      color: rgba(224, 175, 104, 0.6);
+    }
+
+    /* Draw box */
+    #draw-box {
+      position: absolute;
+      border: 2px solid #ff9e64;
+      background: rgba(255, 158, 100, 0.12);
+      pointer-events: none;
+      display: none;
+      z-index: 20;
+    }
+
+    /* Scene elements (NPC sprites) */
+    .cal-scene-element {
+      position: absolute;
+      pointer-events: none;
+      opacity: 0.6;
+    }
+
+    .cal-scene-element img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      filter: drop-shadow(0 2px 4px rgba(0,0,0,0.5));
+    }
+
+    /* ─── Hotspot Info Bar ─── */
+    #hotspot-info {
+      height: 90px;
+      min-height: 90px;
+      background: #16161e;
+      border-top: 1px solid #2a2a35;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 0 20px;
+    }
+
+    #hotspot-label {
+      min-width: 180px;
+    }
+
+    #hotspot-label .hs-name {
+      font-size: 14px;
+      font-weight: bold;
+      color: #e0e0e0;
+    }
+
+    #hotspot-label .hs-type {
+      font-size: 11px;
+      color: #666;
+      margin-top: 2px;
+    }
+
+    #hotspot-label .hs-progress {
+      font-size: 10px;
+      color: #555;
+      margin-top: 4px;
+    }
+
+    .coord-group {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .coord-field {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .coord-field label {
+      font-size: 9px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #555;
+    }
+
+    .coord-field input {
+      width: 70px;
+      padding: 4px 6px;
+      background: #1a1a24;
+      border: 1px solid #2a2a35;
+      color: #e0e0e0;
+      font-family: inherit;
+      font-size: 12px;
+      border-radius: 3px;
+      text-align: right;
+    }
+
+    .coord-field input:focus {
+      outline: none;
+      border-color: #7aa2f7;
+    }
+
+    .coord-field input.changed {
+      color: #ff9e64;
+      border-color: #ff9e64;
+    }
+
+    .btn-group {
+      display: flex;
+      gap: 8px;
+      margin-left: auto;
+    }
+
+    .btn {
+      padding: 8px 18px;
+      border: 1px solid #2a2a35;
+      background: #1e1e28;
+      color: #ccc;
+      font-family: inherit;
+      font-size: 12px;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+
+    .btn:hover {
+      background: #282838;
+      border-color: #444;
+    }
+
+    .btn-confirm {
+      background: #1a3a2a;
+      border-color: #2a5a3a;
+      color: #9ece6a;
+    }
+
+    .btn-confirm:hover {
+      background: #254a35;
+    }
+
+    .btn-skip {
+      color: #888;
+    }
+
+    .btn-reset {
+      color: #f7768e;
+      border-color: #3a2228;
+    }
+
+    .btn-reset:hover {
+      background: #2a1820;
+    }
+
+    /* ─── Export Panel ─── */
+    #export-panel {
+      width: 0;
+      min-width: 0;
+      background: #16161e;
+      border-left: 1px solid #2a2a35;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      transition: width 0.25s, min-width 0.25s, padding 0.25s;
+    }
+
+    #export-panel.open {
+      width: 380px;
+      min-width: 380px;
+    }
+
+    #export-panel h2 {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: #666;
+      padding: 14px 14px 8px;
+      white-space: nowrap;
+    }
+
+    #export-panel .export-actions {
+      display: flex;
+      gap: 6px;
+      padding: 0 14px 10px;
+    }
+
+    #export-textarea {
+      flex: 1;
+      margin: 0 14px 14px;
+      padding: 10px;
+      background: #0d0d14;
+      border: 1px solid #2a2a35;
+      color: #9ece6a;
+      font-family: inherit;
+      font-size: 11px;
+      border-radius: 4px;
+      resize: none;
+      white-space: pre;
+      overflow: auto;
+    }
+
+    #export-textarea:focus {
+      outline: none;
+      border-color: #7aa2f7;
+    }
+
+    #export-toggle {
+      position: fixed;
+      top: 10px;
+      right: 10px;
+      z-index: 50;
+    }
+
+    /* ─── Drawing cursor ─── */
+    #overlay.drawing-enabled {
+      pointer-events: auto;
+      cursor: crosshair;
+    }
+
+    /* ─── Keyboard hints ─── */
+    #keyboard-hints {
+      position: fixed;
+      bottom: 100px;
+      right: 14px;
+      font-size: 10px;
+      color: #444;
+      text-align: right;
+      line-height: 1.6;
+      z-index: 40;
+      pointer-events: none;
+    }
+
+    #keyboard-hints kbd {
+      display: inline-block;
+      padding: 1px 5px;
+      background: #1e1e28;
+      border: 1px solid #333;
+      border-radius: 3px;
+      font-family: inherit;
+      font-size: 10px;
+      color: #666;
+    }
+
+    /* ─── No scene placeholder ─── */
+    .no-scene {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex: 1;
+      color: #444;
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+  <div id="calibrate-container">
+    <!-- Scene Selector Sidebar -->
+    <div id="scene-selector">
+      <h2>Scenes</h2>
+    </div>
+
+    <!-- Main Editor Area -->
+    <div id="editor-area">
+      <div id="image-wrapper">
+        <div class="no-scene">Select a scene to begin calibration</div>
+      </div>
+
+      <div id="hotspot-info">
+        <div id="hotspot-label">
+          <div class="hs-name">No scene loaded</div>
+          <div class="hs-type"></div>
+          <div class="hs-progress"></div>
+        </div>
+        <div class="coord-group">
+          <div class="coord-field">
+            <label>X %</label>
+            <input type="number" id="coord-x" step="0.5" min="0" max="100" value="0">
+          </div>
+          <div class="coord-field">
+            <label>Y %</label>
+            <input type="number" id="coord-y" step="0.5" min="0" max="100" value="0">
+          </div>
+          <div class="coord-field">
+            <label>W %</label>
+            <input type="number" id="coord-w" step="0.5" min="0" max="100" value="0">
+          </div>
+          <div class="coord-field">
+            <label>H %</label>
+            <input type="number" id="coord-h" step="0.5" min="0" max="100" value="0">
+          </div>
+        </div>
+        <div class="btn-group">
+          <button class="btn btn-reset" id="btn-reset" title="Reset to original coords">Reset</button>
+          <button class="btn btn-skip" id="btn-skip" title="Keep existing coords (S)">Skip</button>
+          <button class="btn btn-confirm" id="btn-confirm" title="Save new coords (Enter)">Confirm</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Export Panel (collapsible) -->
+    <div id="export-panel">
+      <h2>Export</h2>
+      <div class="export-actions">
+        <button class="btn" id="btn-copy">Copy to Clipboard</button>
+        <button class="btn" id="btn-export-all">Export All</button>
+      </div>
+      <textarea id="export-textarea" readonly></textarea>
+    </div>
+  </div>
+
+  <button class="btn" id="export-toggle">Export</button>
+
+  <div id="keyboard-hints">
+    <kbd>Enter</kbd> Confirm &nbsp;
+    <kbd>S</kbd> Skip &nbsp;
+    <kbd>R</kbd> Reset &nbsp;
+    <kbd>E</kbd> Toggle Export
+  </div>
+
+  <!-- Load rooms data -->
+  <script src="js/rooms.js"></script>
+
+  <script>
+  (function() {
+    'use strict';
+
+    // ─── State ───
+    var allRooms = window.Rooms.getAll();
+    var calibrateScenes = ['waiting-room', 'front-desk', 'break-room', 'filing-room', 'manager-office'];
+
+    var currentSceneId = null;
+    var currentHotspots = [];
+    var currentHotspotIndex = -1;
+    var modifiedCoords = {};   // { sceneId: { hotspotId: {x,y,width,height} } }
+    var confirmedSet = {};     // { sceneId: Set of hotspot IDs }
+    var sceneCompleted = {};   // { sceneId: true }
+
+    // Drawing state
+    var isDrawing = false;
+    var drawStart = null;
+
+    // DOM refs
+    var imageWrapper = document.getElementById('image-wrapper');
+    var overlay = null;
+    var drawBox = null;
+    var bgImg = null;
+
+    var coordX = document.getElementById('coord-x');
+    var coordY = document.getElementById('coord-y');
+    var coordW = document.getElementById('coord-w');
+    var coordH = document.getElementById('coord-h');
+    var hsName = document.querySelector('.hs-name');
+    var hsType = document.querySelector('.hs-type');
+    var hsProgress = document.querySelector('.hs-progress');
+
+    var btnConfirm = document.getElementById('btn-confirm');
+    var btnSkip = document.getElementById('btn-skip');
+    var btnReset = document.getElementById('btn-reset');
+    var btnCopy = document.getElementById('btn-copy');
+    var btnExportAll = document.getElementById('btn-export-all');
+    var exportToggle = document.getElementById('export-toggle');
+    var exportPanel = document.getElementById('export-panel');
+    var exportTextarea = document.getElementById('export-textarea');
+
+    // ─── Initialize ───
+    function init() {
+      buildSceneSelector();
+      bindButtons();
+      bindKeyboard();
+      bindCoordInputs();
+      initResizeHandler();
+
+      // Auto-load first scene
+      if (calibrateScenes.length > 0) {
+        loadScene(calibrateScenes[0]);
+      }
+    }
+
+    // ─── Scene Selector ───
+    function buildSceneSelector() {
+      var container = document.getElementById('scene-selector');
+      // Keep the h2
+      calibrateScenes.forEach(function(sceneId) {
+        var room = allRooms[sceneId];
+        if (!room) return;
+        var btn = document.createElement('button');
+        btn.className = 'scene-btn';
+        btn.dataset.sceneId = sceneId;
+
+        var nameSpan = document.createElement('span');
+        nameSpan.textContent = room.name;
+        btn.appendChild(nameSpan);
+
+        var countSpan = document.createElement('span');
+        countSpan.className = 'scene-count';
+        countSpan.textContent = room.hotspots ? room.hotspots.length : 0;
+        btn.appendChild(countSpan);
+
+        btn.addEventListener('click', function() {
+          loadScene(sceneId);
+        });
+
+        container.appendChild(btn);
+      });
+    }
+
+    function updateSceneSelector() {
+      var buttons = document.querySelectorAll('.scene-btn');
+      buttons.forEach(function(btn) {
+        var sid = btn.dataset.sceneId;
+        btn.classList.toggle('active', sid === currentSceneId);
+        btn.classList.toggle('completed', !!sceneCompleted[sid]);
+
+        // Update count to show confirmed / total
+        var room = allRooms[sid];
+        var total = room && room.hotspots ? room.hotspots.length : 0;
+        var confirmed = confirmedSet[sid] ? confirmedSet[sid].size : 0;
+        var countEl = btn.querySelector('.scene-count');
+        if (confirmed > 0) {
+          countEl.textContent = confirmed + '/' + total;
+        } else {
+          countEl.textContent = total;
+        }
+      });
+    }
+
+    // ─── Load Scene ───
+    function loadScene(sceneId) {
+      var room = allRooms[sceneId];
+      if (!room) return;
+
+      currentSceneId = sceneId;
+      currentHotspots = room.hotspots ? room.hotspots.slice() : [];
+      currentHotspotIndex = -1;
+
+      if (!confirmedSet[sceneId]) {
+        confirmedSet[sceneId] = new Set();
+      }
+
+      // Clear image wrapper
+      imageWrapper.innerHTML = '';
+
+      // Create background image (same approach as game)
+      bgImg = document.createElement('img');
+      bgImg.className = 'bg-image';
+      bgImg.src = room.backgroundImage;
+      bgImg.alt = room.name;
+      imageWrapper.appendChild(bgImg);
+
+      // Create overlay
+      overlay = document.createElement('div');
+      overlay.id = 'overlay';
+      overlay.className = 'drawing-enabled';
+      imageWrapper.appendChild(overlay);
+
+      // Create draw box
+      drawBox = document.createElement('div');
+      drawBox.id = 'draw-box';
+      overlay.appendChild(drawBox);
+
+      // Position overlay once image loads
+      if (bgImg.complete && bgImg.naturalWidth > 0) {
+        positionOverlay();
+        renderHotspots();
+      }
+      bgImg.addEventListener('load', function() {
+        positionOverlay();
+        renderHotspots();
+      });
+
+      // Bind drawing events
+      bindDrawing();
+
+      // Update UI
+      updateSceneSelector();
+
+      // Advance to first hotspot
+      nextHotspot();
+    }
+
+    // ─── Overlay Positioning (identical to game) ───
+    function positionOverlay() {
+      if (!bgImg || !overlay) return;
+      var imgRect = bgImg.getBoundingClientRect();
+      var wrapperRect = imageWrapper.getBoundingClientRect();
+
+      overlay.style.left = (imgRect.left - wrapperRect.left) + 'px';
+      overlay.style.top = (imgRect.top - wrapperRect.top) + 'px';
+      overlay.style.width = imgRect.width + 'px';
+      overlay.style.height = imgRect.height + 'px';
+    }
+
+    function initResizeHandler() {
+      var timer = null;
+      window.addEventListener('resize', function() {
+        if (timer) clearTimeout(timer);
+        timer = setTimeout(function() {
+          positionOverlay();
+          renderHotspots();
+        }, 100);
+      });
+    }
+
+    // ─── Render Hotspots on Overlay ───
+    function renderHotspots() {
+      if (!overlay) return;
+
+      // Remove existing hotspot divs (keep draw box)
+      var existing = overlay.querySelectorAll('.cal-hotspot, .cal-scene-element');
+      existing.forEach(function(el) { el.remove(); });
+
+      // Render scene elements (NPC sprites) for visual reference
+      var room = allRooms[currentSceneId];
+      if (room && room.sceneElements) {
+        room.sceneElements.forEach(function(elemData) {
+          var elem = document.createElement('div');
+          elem.className = 'cal-scene-element';
+          elem.style.left = elemData.x + '%';
+          elem.style.top = elemData.y + '%';
+          elem.style.width = elemData.width + '%';
+          elem.style.height = elemData.height + '%';
+          if (elemData.svg) {
+            var img = document.createElement('img');
+            img.src = 'data:image/svg+xml,' + encodeURIComponent(elemData.svg);
+            elem.appendChild(img);
+          }
+          overlay.appendChild(elem);
+        });
+      }
+
+      // Render hotspot boxes
+      currentHotspots.forEach(function(hs, idx) {
+        var coords = getEffectiveCoords(currentSceneId, hs);
+        var div = document.createElement('div');
+        div.className = 'cal-hotspot';
+        div.dataset.hotspotId = hs.id;
+        div.dataset.index = idx;
+        div.style.left = coords.x + '%';
+        div.style.top = coords.y + '%';
+        div.style.width = coords.width + '%';
+        div.style.height = coords.height + '%';
+
+        // Label
+        var label = document.createElement('span');
+        label.className = 'cal-label';
+        label.textContent = hs.label || hs.id;
+        div.appendChild(label);
+
+        // State classes
+        if (idx === currentHotspotIndex) {
+          div.classList.add('is-active');
+        }
+        if (confirmedSet[currentSceneId] && confirmedSet[currentSceneId].has(hs.id)) {
+          div.classList.add('is-confirmed');
+        }
+        if (modifiedCoords[currentSceneId] && modifiedCoords[currentSceneId][hs.id]) {
+          div.classList.add('is-modified');
+        }
+
+        overlay.appendChild(div);
+      });
+    }
+
+    // ─── Get effective coordinates (modified or original) ───
+    function getEffectiveCoords(sceneId, hotspot) {
+      if (modifiedCoords[sceneId] && modifiedCoords[sceneId][hotspot.id]) {
+        return modifiedCoords[sceneId][hotspot.id];
+      }
+      return { x: hotspot.x, y: hotspot.y, width: hotspot.width, height: hotspot.height };
+    }
+
+    function getOriginalCoords(hotspot) {
+      return { x: hotspot.x, y: hotspot.y, width: hotspot.width, height: hotspot.height };
+    }
+
+    // ─── Hotspot Stepping ───
+    function nextHotspot() {
+      currentHotspotIndex++;
+      if (currentHotspotIndex >= currentHotspots.length) {
+        // Scene complete
+        sceneCompleted[currentSceneId] = true;
+        updateSceneSelector();
+        showSceneComplete();
+        updateExport();
+        return;
+      }
+      activateHotspot(currentHotspotIndex);
+    }
+
+    function activateHotspot(idx) {
+      currentHotspotIndex = idx;
+      var hs = currentHotspots[idx];
+      if (!hs) return;
+
+      var coords = getEffectiveCoords(currentSceneId, hs);
+
+      // Update info bar
+      hsName.textContent = hs.label || hs.id;
+      hsType.textContent = hs.type + (hs.target ? ' → ' + hs.target : '');
+      hsProgress.textContent = (idx + 1) + ' of ' + currentHotspots.length;
+
+      // Update coord inputs
+      setCoordInputs(coords);
+      highlightChangedInputs(hs, coords);
+
+      // Re-render to show active state
+      renderHotspots();
+    }
+
+    function showSceneComplete() {
+      hsName.textContent = 'Scene complete';
+      hsType.textContent = currentSceneId;
+      hsProgress.textContent = currentHotspots.length + ' of ' + currentHotspots.length;
+      coordX.value = '';
+      coordY.value = '';
+      coordW.value = '';
+      coordH.value = '';
+
+      // Auto-advance to next incomplete scene
+      var nextScene = calibrateScenes.find(function(sid) {
+        return !sceneCompleted[sid];
+      });
+      if (nextScene) {
+        hsProgress.textContent += ' — click next scene or press Enter';
+      } else {
+        hsProgress.textContent += ' — all scenes calibrated!';
+      }
+    }
+
+    // ─── Coord Input Handling ───
+    function setCoordInputs(coords) {
+      coordX.value = round2(coords.x);
+      coordY.value = round2(coords.y);
+      coordW.value = round2(coords.width);
+      coordH.value = round2(coords.height);
+    }
+
+    function getCoordInputs() {
+      return {
+        x: parseFloat(coordX.value) || 0,
+        y: parseFloat(coordY.value) || 0,
+        width: parseFloat(coordW.value) || 0,
+        height: parseFloat(coordH.value) || 0
+      };
+    }
+
+    function highlightChangedInputs(hotspot, coords) {
+      var orig = getOriginalCoords(hotspot);
+      coordX.classList.toggle('changed', round2(coords.x) !== round2(orig.x));
+      coordY.classList.toggle('changed', round2(coords.y) !== round2(orig.y));
+      coordW.classList.toggle('changed', round2(coords.width) !== round2(orig.width));
+      coordH.classList.toggle('changed', round2(coords.height) !== round2(orig.height));
+    }
+
+    function bindCoordInputs() {
+      [coordX, coordY, coordW, coordH].forEach(function(input) {
+        input.addEventListener('input', function() {
+          if (currentHotspotIndex < 0 || currentHotspotIndex >= currentHotspots.length) return;
+          var hs = currentHotspots[currentHotspotIndex];
+          var coords = getCoordInputs();
+
+          // Store as modified
+          if (!modifiedCoords[currentSceneId]) modifiedCoords[currentSceneId] = {};
+          modifiedCoords[currentSceneId][hs.id] = coords;
+
+          highlightChangedInputs(hs, coords);
+          renderHotspots();
+        });
+      });
+    }
+
+    // ─── Drawing ───
+    function bindDrawing() {
+      if (!overlay) return;
+
+      overlay.addEventListener('mousedown', function(e) {
+        if (currentHotspotIndex < 0 || currentHotspotIndex >= currentHotspots.length) return;
+        if (e.button !== 0) return;
+
+        isDrawing = true;
+        var rect = overlay.getBoundingClientRect();
+        drawStart = {
+          px: e.clientX - rect.left,
+          py: e.clientY - rect.top
+        };
+        drawBox.style.display = 'block';
+        drawBox.style.left = drawStart.px + 'px';
+        drawBox.style.top = drawStart.py + 'px';
+        drawBox.style.width = '0px';
+        drawBox.style.height = '0px';
+        e.preventDefault();
+      });
+
+      overlay.addEventListener('mousemove', function(e) {
+        if (!isDrawing || !drawStart) return;
+        var rect = overlay.getBoundingClientRect();
+        var cx = e.clientX - rect.left;
+        var cy = e.clientY - rect.top;
+
+        var x = Math.min(drawStart.px, cx);
+        var y = Math.min(drawStart.py, cy);
+        var w = Math.abs(cx - drawStart.px);
+        var h = Math.abs(cy - drawStart.py);
+
+        drawBox.style.left = x + 'px';
+        drawBox.style.top = y + 'px';
+        drawBox.style.width = w + 'px';
+        drawBox.style.height = h + 'px';
+
+        // Update coord inputs live (as percentages)
+        var ow = rect.width;
+        var oh = rect.height;
+        var coords = {
+          x: (x / ow) * 100,
+          y: (y / oh) * 100,
+          width: (w / ow) * 100,
+          height: (h / oh) * 100
+        };
+        setCoordInputs(coords);
+
+        if (currentHotspotIndex >= 0 && currentHotspotIndex < currentHotspots.length) {
+          highlightChangedInputs(currentHotspots[currentHotspotIndex], coords);
+        }
+      });
+
+      overlay.addEventListener('mouseup', function(e) {
+        if (!isDrawing) return;
+        isDrawing = false;
+        drawBox.style.display = 'none';
+
+        if (currentHotspotIndex < 0 || currentHotspotIndex >= currentHotspots.length) return;
+
+        var rect = overlay.getBoundingClientRect();
+        var cx = e.clientX - rect.left;
+        var cy = e.clientY - rect.top;
+
+        var x = Math.min(drawStart.px, cx);
+        var y = Math.min(drawStart.py, cy);
+        var w = Math.abs(cx - drawStart.px);
+        var h = Math.abs(cy - drawStart.py);
+
+        // Ignore tiny accidental clicks (less than 5px in either dimension)
+        if (w < 5 && h < 5) {
+          drawStart = null;
+          return;
+        }
+
+        var ow = rect.width;
+        var oh = rect.height;
+
+        var coords = {
+          x: round2((x / ow) * 100),
+          y: round2((y / oh) * 100),
+          width: round2((w / ow) * 100),
+          height: round2((h / oh) * 100)
+        };
+
+        // Store modified coords
+        var hs = currentHotspots[currentHotspotIndex];
+        if (!modifiedCoords[currentSceneId]) modifiedCoords[currentSceneId] = {};
+        modifiedCoords[currentSceneId][hs.id] = coords;
+
+        setCoordInputs(coords);
+        highlightChangedInputs(hs, coords);
+        renderHotspots();
+
+        drawStart = null;
+      });
+
+      // Cancel drawing on mouseleave
+      overlay.addEventListener('mouseleave', function() {
+        if (isDrawing) {
+          isDrawing = false;
+          drawBox.style.display = 'none';
+          drawStart = null;
+        }
+      });
+    }
+
+    // ─── Buttons ───
+    function bindButtons() {
+      btnConfirm.addEventListener('click', confirmHotspot);
+      btnSkip.addEventListener('click', skipHotspot);
+      btnReset.addEventListener('click', resetHotspot);
+      btnCopy.addEventListener('click', copyExport);
+      btnExportAll.addEventListener('click', exportAll);
+
+      exportToggle.addEventListener('click', function() {
+        exportPanel.classList.toggle('open');
+        updateExport();
+      });
+    }
+
+    function confirmHotspot() {
+      if (currentHotspotIndex < 0 || currentHotspotIndex >= currentHotspots.length) {
+        // If scene is complete, try to go to next scene
+        var nextScene = calibrateScenes.find(function(sid) {
+          return !sceneCompleted[sid];
+        });
+        if (nextScene) loadScene(nextScene);
+        return;
+      }
+
+      var hs = currentHotspots[currentHotspotIndex];
+
+      // Save current input values as the modified coords
+      var coords = getCoordInputs();
+      if (!modifiedCoords[currentSceneId]) modifiedCoords[currentSceneId] = {};
+      modifiedCoords[currentSceneId][hs.id] = coords;
+
+      // Mark as confirmed
+      confirmedSet[currentSceneId].add(hs.id);
+      updateExport();
+      nextHotspot();
+    }
+
+    function skipHotspot() {
+      if (currentHotspotIndex < 0 || currentHotspotIndex >= currentHotspots.length) return;
+
+      var hs = currentHotspots[currentHotspotIndex];
+      confirmedSet[currentSceneId].add(hs.id);
+      nextHotspot();
+    }
+
+    function resetHotspot() {
+      if (currentHotspotIndex < 0 || currentHotspotIndex >= currentHotspots.length) return;
+
+      var hs = currentHotspots[currentHotspotIndex];
+
+      // Remove modified coords for this hotspot
+      if (modifiedCoords[currentSceneId]) {
+        delete modifiedCoords[currentSceneId][hs.id];
+      }
+
+      var coords = getOriginalCoords(hs);
+      setCoordInputs(coords);
+      highlightChangedInputs(hs, coords);
+      renderHotspots();
+    }
+
+    // ─── Keyboard Shortcuts ───
+    function bindKeyboard() {
+      document.addEventListener('keydown', function(e) {
+        // Don't capture when typing in inputs
+        if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+
+        switch (e.key) {
+          case 'Enter':
+            e.preventDefault();
+            confirmHotspot();
+            break;
+          case 's':
+          case 'S':
+            e.preventDefault();
+            skipHotspot();
+            break;
+          case 'r':
+          case 'R':
+            e.preventDefault();
+            resetHotspot();
+            break;
+          case 'e':
+          case 'E':
+            e.preventDefault();
+            exportPanel.classList.toggle('open');
+            updateExport();
+            break;
+        }
+      });
+    }
+
+    // ─── Export ───
+    function updateExport() {
+      var output = {};
+
+      calibrateScenes.forEach(function(sceneId) {
+        var room = allRooms[sceneId];
+        if (!room || !room.hotspots) return;
+        if (!modifiedCoords[sceneId]) return;
+
+        var sceneChanges = [];
+        room.hotspots.forEach(function(hs) {
+          var mod = modifiedCoords[sceneId][hs.id];
+          if (!mod) return;
+
+          // Only include if actually changed from original
+          var orig = getOriginalCoords(hs);
+          if (round2(mod.x) === round2(orig.x) &&
+              round2(mod.y) === round2(orig.y) &&
+              round2(mod.width) === round2(orig.width) &&
+              round2(mod.height) === round2(orig.height)) {
+            return;
+          }
+
+          sceneChanges.push({
+            id: hs.id,
+            x: round2(mod.x),
+            y: round2(mod.y),
+            width: round2(mod.width),
+            height: round2(mod.height)
+          });
+        });
+
+        if (sceneChanges.length > 0) {
+          output[sceneId] = sceneChanges;
+        }
+      });
+
+      exportTextarea.value = JSON.stringify(output, null, 2);
+    }
+
+    function exportAll() {
+      var output = {};
+
+      calibrateScenes.forEach(function(sceneId) {
+        var room = allRooms[sceneId];
+        if (!room || !room.hotspots) return;
+
+        var allCoords = room.hotspots.map(function(hs) {
+          var coords = getEffectiveCoords(sceneId, hs);
+          return {
+            id: hs.id,
+            x: round2(coords.x),
+            y: round2(coords.y),
+            width: round2(coords.width),
+            height: round2(coords.height)
+          };
+        });
+
+        output[sceneId] = allCoords;
+      });
+
+      exportTextarea.value = JSON.stringify(output, null, 2);
+    }
+
+    function copyExport() {
+      exportTextarea.select();
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(exportTextarea.value).then(function() {
+          btnCopy.textContent = 'Copied!';
+          setTimeout(function() { btnCopy.textContent = 'Copy to Clipboard'; }, 1500);
+        });
+      } else {
+        document.execCommand('copy');
+        btnCopy.textContent = 'Copied!';
+        setTimeout(function() { btnCopy.textContent = 'Copy to Clipboard'; }, 1500);
+      }
+    }
+
+    // ─── Utility ───
+    function round2(n) {
+      return Math.round(n * 100) / 100;
+    }
+
+    // ─── Start ───
+    document.addEventListener('DOMContentLoaded', init);
+  })();
+  </script>
+</body>
+</html>
