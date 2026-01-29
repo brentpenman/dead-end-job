@@ -59,10 +59,10 @@
         {
           id: 'poster-2',
           type: 'look',
-          x: 18,
-          y: 15,
-          width: 16,
-          height: 25,
+          x: 28,
+          y: 8,
+          width: 14,
+          height: 28,
           label: 'Another Poster',
           onInteract: "'Every day is a gift!' ...The return policy here is terrible though."
         },
@@ -135,27 +135,27 @@
           id: 'clerk-npc',
           type: 'talk',
           x: 35,
-          y: 20,
+          y: 12,
           width: 15,
-          height: 45,
+          height: 34,
           label: 'The Clerk',
           dialogueId: 'clerk'
         },
         {
           id: 'desk-bell',
           type: 'look',
-          x: 44,
+          x: 45,
           y: 52,
-          width: 8,
-          height: 8,
+          width: 6,
+          height: 6,
           label: 'Service Bell',
           onInteract: 'A service bell. I ring it. Nothing happens. I ring it again. Still nothing. Truly, this is the afterlife.'
         },
         {
           id: 'next-sign',
           type: 'look',
-          x: 32,
-          y: 48,
+          x: 39,
+          y: 59,
           width: 14,
           height: 8,
           label: '"NEXT" Sign',
@@ -194,9 +194,9 @@
         {
           id: 'exit-filing',
           type: 'exit',
-          x: 72,
+          x: 62,
           y: 5,
-          width: 14,
+          width: 15,
           height: 35,
           target: 'filing-room',
           label: 'Filing Room'
@@ -204,10 +204,10 @@
         {
           id: 'exit-manager',
           type: 'exit',
-          x: 25,
-          y: 2,
-          width: 20,
-          height: 15,
+          x: 15,
+          y: 3,
+          width: 14,
+          height: 40,
           target: 'manager-office',
           label: "Manager's Office"
         }
@@ -226,7 +226,7 @@
           x: 40,
           y: 18,
           width: 15,
-          height: 35,
+          height: 25,
           label: 'Coffee Machine',
           onInteract: "A coffee machine that apparently dispenses 'existential dread' in three flavors. I'll take a dark roast."
         },
@@ -284,7 +284,7 @@
           itemId: 'rubber-stamp',
           itemDescription: "An official rubber stamp. Property of the Manager's Office. Probably shouldn't have been in the Lost and Found.",
           itemIcon: 'data:image/svg+xml,' + encodeURIComponent('<svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg"><rect x="12" y="6" width="16" height="14" rx="3" fill="#7c3aed"/><rect x="16" y="14" width="8" height="8" fill="#6d28d9"/><rect x="6" y="28" width="28" height="8" rx="2" fill="#4c1d95"/><rect x="10" y="22" width="20" height="6" rx="1" fill="#5b21b6"/></svg>'),
-          visibleWhen: { hasFlag: 'clerkSentToManager' }
+          visibleWhen: { hasFlag: 'gotForm27B' }
         },
         {
           id: 'exit-front-desk',
@@ -308,9 +308,9 @@
         {
           id: 'cabinet-npc',
           type: 'talk',
-          x: 40,
+          x: 34,
           y: 15,
-          width: 18,
+          width: 26,
           height: 50,
           label: 'Sentient Filing Cabinet',
           dialogueId: 'cabinet'
@@ -395,10 +395,10 @@
         {
           id: 'manager-npc',
           type: 'talk',
-          x: 35,
-          y: 15,
-          width: 15,
-          height: 45,
+          x: 36,
+          y: 8,
+          width: 16,
+          height: 40,
           label: 'The Manager',
           dialogueId: 'manager'
         },
@@ -415,30 +415,30 @@
         {
           id: 'motivational-plaque',
           type: 'look',
-          x: 38,
-          y: 8,
-          width: 25,
-          height: 10,
+          x: 50,
+          y: 13,
+          width: 20,
+          height: 9,
           label: 'Motivational Plaque',
           onInteract: "A plaque reads 'Every Soul Counts!' with a tally mark system. There are... a lot of tally marks."
         },
         {
           id: 'potted-plant',
           type: 'look',
-          x: 68,
-          y: 8,
-          width: 14,
-          height: 20,
+          x: 73,
+          y: 6,
+          width: 12,
+          height: 18,
           label: 'Potted Plant',
           onInteract: "A fake potted plant. Even the plants here aren't alive. I'd say that's poetic if it weren't so on the nose."
         },
         {
           id: 'exit-front-desk',
           type: 'exit',
-          x: 5,
-          y: 20,
-          width: 15,
-          height: 55,
+          x: 8,
+          y: 10,
+          width: 20,
+          height: 58,
           target: 'front-desk',
           label: 'Front Desk'
         }
