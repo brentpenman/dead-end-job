@@ -81,6 +81,11 @@
     handleHotspotClick: function(hotspot) {
       console.log('Hotspot clicked:', hotspot.label, '(type:', hotspot.type + ')');
 
+      // Block hotspot interaction while dialogue is open
+      if (Game.dialogueOpen) {
+        return;
+      }
+
       // Check if player has an inventory item selected
       if (typeof Inventory !== 'undefined' && Inventory.getSelected && Inventory.getSelected()) {
         // Player is trying to use selected item on this hotspot

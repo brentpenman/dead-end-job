@@ -1,2 +1,120 @@
 /* Dead End Job - Dialogue Styles */
-/* To be implemented in Phase 1 Plan 03 */
+/* Dialogue box with NPC portrait, branching choices, and typewriter text */
+
+#dialogue-container {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.5);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  z-index: 20;
+  padding-bottom: 80px; /* Above inventory bar */
+}
+
+#dialogue-container.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.dialogue-box {
+  width: 80%;
+  max-width: 700px;
+  background: rgba(30, 25, 20, 0.95);
+  border: 2px solid #666;
+  border-radius: 8px;
+  padding: 0;
+  overflow: hidden;
+  display: flex;
+  flex-direction: row;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
+}
+
+.dialogue-portrait {
+  width: 120px;
+  min-height: 150px;
+  background: #333;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-right: 2px solid #555;
+  flex-shrink: 0;
+}
+
+.dialogue-portrait .portrait-placeholder {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: #556;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 32px;
+  color: white;
+  font-weight: bold;
+  border: 3px solid #777;
+}
+
+.dialogue-content {
+  flex: 1;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+}
+
+.dialogue-npc-name {
+  font-weight: bold;
+  color: #ffcc00;
+  font-size: 14px;
+  margin-bottom: 8px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.dialogue-text {
+  color: #ddd;
+  font-size: 15px;
+  line-height: 1.5;
+  min-height: 60px;
+  margin-bottom: 12px;
+  cursor: pointer;
+}
+
+.dialogue-choices {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.dialogue-choice {
+  background: rgba(80, 70, 50, 0.6);
+  border: 1px solid #777;
+  border-radius: 4px;
+  padding: 8px 12px;
+  color: #eee;
+  font-size: 14px;
+  cursor: pointer;
+  text-align: left;
+  transition: all 0.15s ease;
+  font-family: inherit;
+}
+
+.dialogue-choice:hover {
+  background: rgba(120, 100, 60, 0.8);
+  border-color: #ffcc00;
+  color: #fff;
+  transform: translateX(4px);
+}
+
+.dialogue-choice.leave-choice {
+  color: #999;
+  font-style: italic;
+  margin-top: 4px;
+}
+
+.dialogue-choice.leave-choice:hover {
+  color: #ccc;
+}
