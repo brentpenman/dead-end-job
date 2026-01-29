@@ -28,10 +28,10 @@
 
 ### Puzzles
 
-- [ ] **PZL-01**: Ticket machine puzzle — combine items to fix it, get a number
-- [ ] **PZL-02**: Filing cabinet puzzle — trade an item to receive Form 27-B
-- [ ] **PZL-03**: Stamp puzzle — find the stamp and bring it to the Manager
-- [ ] **PZL-04**: Puzzles gate progression (can't skip ahead)
+- [x] **PZL-01**: Ticket machine puzzle — combine items to fix it, get a number
+- [x] **PZL-02**: Filing cabinet puzzle — trade an item to receive Form 27-B
+- [x] **PZL-03**: Stamp puzzle — find the stamp and bring it to the Manager
+- [x] **PZL-04**: Puzzles gate progression (can't skip ahead)
 
 ### Scenes
 
@@ -101,10 +101,10 @@
 | DLG-02 | Phase 1 | Complete |
 | DLG-03 | Phase 1 | Complete |
 | DLG-04 | Phase 1 | Complete |
-| PZL-01 | Phase 3 | Pending |
-| PZL-02 | Phase 3 | Pending |
-| PZL-03 | Phase 3 | Pending |
-| PZL-04 | Phase 3 | Pending |
+| PZL-01 | Phase 3 | Complete |
+| PZL-02 | Phase 3 | Complete |
+| PZL-03 | Phase 3 | Complete |
+| PZL-04 | Phase 3 | Complete |
 | SCN-01 | Phase 2 | Complete |
 | SCN-02 | Phase 2 | Complete |
 | SCN-03 | Phase 2 | Complete |
