@@ -178,7 +178,18 @@
 
       // Set portrait
       var portraitContainer = document.querySelector('.dialogue-portrait');
-      if (tree.portraitSVG) {
+      if (tree.portraitImage) {
+        var placeholder = document.getElementById('dialogue-portrait-placeholder');
+        if (placeholder) placeholder.style.display = 'none';
+        // Remove any existing portrait image
+        var existingImg = portraitContainer.querySelector('img');
+        if (existingImg) existingImg.remove();
+        var img = document.createElement('img');
+        img.src = tree.portraitImage;
+        img.width = 160;
+        img.height = 160;
+        portraitContainer.appendChild(img);
+      } else if (tree.portraitSVG) {
         var placeholder = document.getElementById('dialogue-portrait-placeholder');
         if (placeholder) placeholder.style.display = 'none';
         // Remove any existing portrait image

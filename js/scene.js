@@ -54,7 +54,15 @@
           elem.style.height = elemData.height + '%';
           elem.style.pointerEvents = 'none';
           elem.style.zIndex = '1';
-          if (elemData.svg) {
+          elem._elementData = elemData;
+          if (elemData.image) {
+            var img = document.createElement('img');
+            img.src = elemData.image;
+            img.style.width = '100%';
+            img.style.height = '100%';
+            img.style.objectFit = 'contain';
+            elem.appendChild(img);
+          } else if (elemData.svg) {
             var img = document.createElement('img');
             img.src = 'data:image/svg+xml,' + encodeURIComponent(elemData.svg);
             img.style.width = '100%';

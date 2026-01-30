@@ -108,37 +108,21 @@
       sceneElements: [
         {
           id: 'clerk-sprite',
-          x: 33,
-          y: 12,
-          width: 16,
-          height: 42,
-          svg: '<svg viewBox="0 0 120 300" xmlns="http://www.w3.org/2000/svg">'
-            + '<ellipse cx="60" cy="42" rx="28" ry="32" fill="#d4b896"/>'
-            + '<ellipse cx="48" cy="38" rx="7" ry="3" fill="#4a4a4a"/>'
-            + '<ellipse cx="72" cy="38" rx="7" ry="3" fill="#4a4a4a"/>'
-            + '<circle cx="48" cy="38" r="2" fill="#222"/>'
-            + '<circle cx="72" cy="38" r="2" fill="#222"/>'
-            + '<line x1="48" y1="55" x2="72" y2="55" stroke="#a0846e" stroke-width="2" stroke-linecap="round"/>'
-            + '<rect x="35" y="70" width="50" height="90" rx="8" fill="#5c6370"/>'
-            + '<rect x="50" y="75" width="20" height="30" fill="#e8e0d4"/>'
-            + '<line x1="60" y1="75" x2="60" y2="105" stroke="#bbb" stroke-width="1"/>'
-            + '<polygon points="55,105 65,105 68,120 52,120" fill="#3a5a8c"/>'
-            + '<rect x="20" y="85" width="20" height="60" rx="5" fill="#5c6370"/>'
-            + '<rect x="80" y="85" width="20" height="60" rx="5" fill="#5c6370"/>'
-            + '<ellipse cx="20" cy="145" rx="8" ry="6" fill="#d4b896"/>'
-            + '<ellipse cx="100" cy="145" rx="8" ry="6" fill="#d4b896"/>'
-            + '<rect x="25" y="160" width="70" height="4" rx="2" fill="#444" opacity="0.3"/>'
-            + '</svg>'
+          x: 0,
+          y: 0,
+          width: 100,
+          height: 100,
+          image: 'images/clerk-sprite.png'
         }
       ],
       hotspots: [
         {
           id: 'clerk-npc',
           type: 'talk',
-          x: 34.19,
-          y: 11.93,
-          width: 14.39,
-          height: 23.99,
+          x: 30.26,
+          y: 33.21,
+          width: 16.11,
+          height: 27.92,
           label: 'The Clerk',
           dialogueId: 'clerk'
         },
@@ -155,10 +139,10 @@
         {
           id: 'next-sign',
           type: 'look',
-          x: 38.99,
-          y: 61.01,
-          width: 7.38,
-          height: 3.69,
+          x: 39.24,
+          y: 60.89,
+          width: 7.87,
+          height: 10.82,
           label: '"NEXT" Sign',
           onInteract: "A neon 'NEXT' sign that's been stuck on the same number since 1987. Comforting."
         },
@@ -228,6 +212,18 @@
       name: 'Break Room',
       background: '#2a2a3a',
       backgroundImage: 'images/break-room.png',
+      sceneElements: [
+        {
+          id: 'rubber-stamp-sprite',
+          x: 15.25,
+          y: 43.67,
+          width: 5.66,
+          height: 3.44,
+          image: 'images/rubber-stamp.png',
+          visibleWhen: { hasFlag: 'gotForm27B' },
+          itemId: 'rubber-stamp'
+        }
+      ],
       hotspots: [
         {
           id: 'coffee-machine',
@@ -375,39 +371,21 @@
       sceneElements: [
         {
           id: 'manager-sprite',
-          x: 38,
-          y: 8,
-          width: 16,
-          height: 40,
-          svg: '<svg viewBox="0 0 120 300" xmlns="http://www.w3.org/2000/svg">'
-            + '<polygon points="60,0 72,18 48,18" fill="#fbbf24"/>'
-            + '<ellipse cx="60" cy="45" rx="28" ry="32" fill="#c084d0"/>'
-            + '<circle cx="46" cy="40" r="6" fill="white"/>'
-            + '<circle cx="74" cy="40" r="6" fill="white"/>'
-            + '<circle cx="46" cy="40" r="3" fill="#2d1b4e"/>'
-            + '<circle cx="74" cy="40" r="3" fill="#2d1b4e"/>'
-            + '<path d="M42 58 Q60 74 78 58" stroke="white" stroke-width="3" fill="none" stroke-linecap="round"/>'
-            + '<rect x="44" y="58" width="32" height="8" rx="4" fill="white"/>'
-            + '<rect x="30" y="75" width="60" height="90" rx="10" fill="#7c3aed"/>'
-            + '<rect x="48" y="80" width="24" height="30" fill="#e8e0d4"/>'
-            + '<line x1="60" y1="80" x2="60" y2="110" stroke="#bbb" stroke-width="1"/>'
-            + '<polygon points="54,110 66,110 70,125 50,125" fill="#fbbf24"/>'
-            + '<rect x="15" y="90" width="20" height="55" rx="5" fill="#7c3aed"/>'
-            + '<rect x="85" y="90" width="20" height="55" rx="5" fill="#7c3aed"/>'
-            + '<ellipse cx="15" cy="145" rx="8" ry="6" fill="#c084d0"/>'
-            + '<ellipse cx="105" cy="145" rx="8" ry="6" fill="#c084d0"/>'
-            + '<rect x="25" y="165" width="70" height="4" rx="2" fill="#444" opacity="0.3"/>'
-            + '</svg>'
+          x: 0,
+          y: 0,
+          width: 100,
+          height: 100,
+          image: 'images/manager-sprite.png'
         }
       ],
       hotspots: [
         {
           id: 'manager-npc',
           type: 'talk',
-          x: 39.11,
-          y: 7.87,
-          width: 13.9,
-          height: 23.25,
+          x: 64.51,
+          y: 34.69,
+          width: 17.84,
+          height: 21.53,
           label: 'The Manager',
           dialogueId: 'manager'
         },

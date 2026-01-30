@@ -683,7 +683,11 @@
           elem.style.top = elemData.y + '%';
           elem.style.width = elemData.width + '%';
           elem.style.height = elemData.height + '%';
-          if (elemData.svg) {
+          if (elemData.image) {
+            var img = document.createElement('img');
+            img.src = elemData.image;
+            elem.appendChild(img);
+          } else if (elemData.svg) {
             var img = document.createElement('img');
             img.src = 'data:image/svg+xml,' + encodeURIComponent(elemData.svg);
             elem.appendChild(img);

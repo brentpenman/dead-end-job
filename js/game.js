@@ -459,6 +459,31 @@
           el.style.display = 'none';
         }
       });
+
+      // Apply visibility gating to scene elements
+      var sceneElements = container.querySelectorAll('.scene-element');
+      sceneElements.forEach(function(el) {
+        var data = el._elementData;
+        if (!data) return;
+
+        if (data.visibleWhen) {
+          var visible = true;
+          if (data.visibleWhen.hasFlag) {
+            visible = !!Game.getFlag(data.visibleWhen.hasFlag);
+          }
+          if (data.visibleWhen.notFlag) {
+            visible = !Game.getFlag(data.visibleWhen.notFlag);
+          }
+          if (!visible) {
+            el.style.display = 'none';
+          }
+        }
+
+        // Hide scene element if its item has been picked up
+        if (data.itemId && Game.hasItem(data.itemId)) {
+          el.style.display = 'none';
+        }
+      });
     }
   };
 

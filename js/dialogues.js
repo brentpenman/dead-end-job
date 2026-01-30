@@ -9,7 +9,7 @@
       id: 'clerk',
       npcName: 'The Clerk',
       portrait: '#6b7280',
-      portraitSVG: '<svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><circle cx="40" cy="32" r="22" fill="#6b7280"/><ellipse cx="32" cy="30" rx="6" ry="2.5" fill="#374151"/><ellipse cx="48" cy="30" rx="6" ry="2.5" fill="#374151"/><line x1="32" y1="42" x2="48" y2="42" stroke="#374151" stroke-width="2" stroke-linecap="round"/><rect x="36" y="54" width="8" height="12" fill="#6b7280" rx="2"/><polygon points="36,58 44,58 48,70 32,70" fill="#4b5563"/><polygon points="38,58 42,58 42,70 38,70" fill="#3b82f6" opacity="0.7"/></svg>',
+      portraitImage: 'images/clerk-portrait.png',
       nodes: {
         'start': {
           text: "Next. ...Oh, you don't have a number. You need to take a number from the machine in the Waiting Room. Policy is policy.",
@@ -66,7 +66,7 @@
       id: 'cabinet',
       npcName: 'Filing Cabinet',
       portrait: '#78716c',
-      portraitSVG: '<svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><rect x="15" y="8" width="50" height="68" rx="3" fill="#78716c"/><rect x="19" y="12" width="42" height="18" rx="2" fill="#57534e"/><rect x="19" y="34" width="42" height="18" rx="2" fill="#57534e"/><rect x="19" y="56" width="42" height="16" rx="2" fill="#57534e"/><rect x="34" y="18" width="12" height="4" rx="1" fill="#a8a29e"/><rect x="34" y="40" width="12" height="4" rx="1" fill="#a8a29e"/><circle cx="32" cy="21" r="3" fill="#fbbf24"/><circle cx="48" cy="21" r="3" fill="#fbbf24"/><line x1="30" y1="46" x2="50" y2="48" stroke="#a8a29e" stroke-width="2" stroke-linecap="round"/><rect x="28" y="60" width="24" height="8" rx="1" fill="#84cc16" opacity="0.7"/></svg>',
+      portraitImage: 'images/filing-portrait.png',
       nodes: {
         'start': {
           text: "WHAT. Do you KNOW what time it is? It's ALWAYS filing time and I am BUSY. State your business or get out of my drawer.",
@@ -136,7 +136,7 @@
       id: 'manager',
       npcName: 'The Manager',
       portrait: '#7c3aed',
-      portraitSVG: '<svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><polygon points="40,2 46,14 34,14" fill="#fbbf24"/><circle cx="40" cy="36" r="22" fill="#7c3aed"/><circle cx="32" cy="32" r="5" fill="white"/><circle cx="48" cy="32" r="5" fill="white"/><circle cx="32" cy="32" r="2.5" fill="#1e1b4b"/><circle cx="48" cy="32" r="2.5" fill="#1e1b4b"/><path d="M28 44 Q40 56 52 44" stroke="white" stroke-width="2.5" fill="none" stroke-linecap="round"/><rect x="30" y="44" width="20" height="6" rx="3" fill="white"/></svg>',
+      portraitImage: 'images/manager-portrait.png',
       nodes: {
         'start': {
           text: "Well HELLO there, new soul! Welcome to my office! Isn't it GREAT? I just love processing days! What can I do for you today?",
