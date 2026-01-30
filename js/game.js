@@ -377,10 +377,13 @@
         Game.restartGame();
       };
 
-      overlay.appendChild(title);
-      overlay.appendChild(p1);
-      overlay.appendChild(p2);
-      overlay.appendChild(button);
+      var textBox = document.createElement('div');
+      textBox.style.cssText = 'background: rgba(50, 50, 50, 0.75); padding: 2em 2.5em; border-radius: 12px;';
+      textBox.appendChild(title);
+      textBox.appendChild(p1);
+      textBox.appendChild(p2);
+      textBox.appendChild(button);
+      overlay.appendChild(textBox);
       container.appendChild(overlay);
     },
 
