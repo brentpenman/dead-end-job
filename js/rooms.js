@@ -317,7 +317,7 @@
           y: 23.86,
           width: 19.31,
           height: 52.4,
-          label: 'Sentient Filing Cabinet',
+          label: 'The Chronicler',
           dialogueId: 'cabinet'
         },
         {
@@ -338,7 +338,7 @@
           width: 21.4,
           height: 79.34,
           label: 'Filing Cabinets (Right)',
-          onInteract: "More filing cabinets. These ones are labeled 'H through N.' I wonder if they're all this chatty."
+          onInteract: "More filing cabinets. These ones are labeled 'H through N.' The Chronicler keeps a tight ship."
         },
         {
           id: 'dusty-floor',

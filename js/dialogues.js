@@ -1,5 +1,5 @@
 // Dead End Job - NPC Dialogue Trees
-// All dialogue content for Clerk, Filing Cabinet, and Manager
+// All dialogue content for Clerk, Chronicler, and Manager
 
 (function() {
   'use strict';
@@ -64,20 +64,20 @@
 
     'cabinet': {
       id: 'cabinet',
-      npcName: 'Filing Cabinet',
+      npcName: 'The Chronicler',
       portrait: '#78716c',
       portraitImage: 'images/filing-portrait.png',
       nodes: {
         'start': {
-          text: "WHAT. Do you KNOW what time it is? It's ALWAYS filing time and I am BUSY. State your business or get out of my drawer.",
+          text: "WHAT. Do you KNOW what time it is? It's ALWAYS filing time and I am BUSY. State your business or get out of my filing room.",
           choices: [
             { text: "I need Form 27-B.", next: 'need-form' },
-            { text: "You're... a talking filing cabinet?", next: 'talking' },
+            { text: "You're... the Chronicler of Fates?", next: 'talking' },
             { text: "Nice drawers.", next: 'nice-drawers' }
           ]
         },
         'need-form': {
-          text: "Form 27-B? 27-B?! That's in my THIRD drawer. Do you know how much it HURTS to open the third drawer? I want something in return.",
+          text: "Form 27-B? 27-B?! That's in my THIRD cabinet. Do you know how much EFFORT it takes to dig through the third cabinet? I want something in return.",
           choices: [
             { text: "What do you want?", next: 'want' },
             { text: "Can't you just give it to me?", next: 'just-give' },
@@ -85,19 +85,19 @@
           ]
         },
         'want': {
-          text: "Something warm. Something comforting. I've been cold and metal for three hundred years. Bring me a hot beverage and MAYBE I'll consider it.",
+          text: "Something warm. Something comforting. I've been cold and miserable for three hundred years. Bring me a hot beverage and MAYBE I'll consider it.",
           choices: [
             { text: "I have coffee right here.", next: 'offer-coffee', condition: { hasItem: 'coffee-mug' } }
           ]
         },
         'just-give': {
-          text: "JUST give it?! Do I come to YOUR afterlife and demand YOU open YOUR third drawer?! No. Bring me something worth my while.",
+          text: "JUST give it?! Do I come to YOUR afterlife and demand YOU dig through YOUR records?! No. Bring me something worth my while.",
           choices: [
             { text: "What do you want?", next: 'want' }
           ]
         },
         'talking': {
-          text: "You're a talking HUMAN and I don't see ME making a big deal about it. Now. Did you need something or are you just here to gawk?",
+          text: "It says so RIGHT on the podium. Can you read? They teach that in life, don't they? Now. Did you need something or are you just here to gawk?",
           choices: [
             { text: "I need Form 27-B.", next: 'need-form' },
             { text: "Fair point.", next: null }
@@ -112,7 +112,7 @@
         'offer-coffee': {
           text: "Is that... is that COFFEE? Oh. Oh that's lovely. That's the warmest thing anyone's done for me in centuries. ...Fine. Here's your stupid form.",
           choices: [
-            { text: "Thanks, you old filing cabinet.", next: 'thanks' }
+            { text: "Thanks, Chronicler.", next: 'thanks' }
           ],
           action: {
             removeItem: 'coffee-mug',
