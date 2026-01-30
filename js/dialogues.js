@@ -69,7 +69,7 @@
       portraitImage: 'images/filing-portrait.png',
       nodes: {
         'start': {
-          text: "WHAT. Do you KNOW what time it is? It's ALWAYS filing time and I am BUSY. State your business or get out of my filing room.",
+          text: "WHAT. Do you KNOW what time it is? It's ALWAYS filing time and I am BUSY. State your business or consider your case... CLOSED.",
           choices: [
             { text: "I need Form 27-B.", next: 'need-form' },
             { text: "You're... the Chronicler of Fates?", next: 'talking' },
@@ -77,7 +77,7 @@
           ]
         },
         'need-form': {
-          text: "Form 27-B? 27-B?! That's in my THIRD cabinet. Do you know how much EFFORT it takes to dig through the third cabinet? I want something in return.",
+          text: "Form 27-B? 27-B?! That's buried in my THIRD cabinet. I haven't opened that one since the Fall of Rome — and THAT was a filing nightmare. I want something in return.",
           choices: [
             { text: "What do you want?", next: 'want' },
             { text: "Can't you just give it to me?", next: 'just-give' },
@@ -85,32 +85,32 @@
           ]
         },
         'want': {
-          text: "Something warm. Something comforting. I've been cold and miserable for three hundred years. Bring me a hot beverage and MAYBE I'll consider it.",
+          text: "Something warm. Something comforting. I've been stuck in this dead-end job for three hundred years — and yes, I KNOW that's a pun. Bring me a hot beverage and MAYBE I'll consider it.",
           choices: [
             { text: "I have coffee right here.", next: 'offer-coffee', condition: { hasItem: 'coffee-mug' } }
           ]
         },
         'just-give': {
-          text: "JUST give it?! Do I come to YOUR afterlife and demand YOU dig through YOUR records?! No. Bring me something worth my while.",
+          text: "JUST give it?! Listen, nothing in the afterlife is free. Even death cost you your LIFE. So bring me something worth my while.",
           choices: [
             { text: "What do you want?", next: 'want' }
           ]
         },
         'talking': {
-          text: "It says so RIGHT on the podium. Can you read? They teach that in life, don't they? Now. Did you need something or are you just here to gawk?",
+          text: "It says so RIGHT on the podium. I chronicle fates. It's not a hobby, it's a CALLING — though nobody ever calls. Now. Did you need something or are you just here to gawk?",
           choices: [
             { text: "I need Form 27-B.", next: 'need-form' },
-            { text: "Fair point.", next: null }
+            { text: "Noted. ...Pun intended.", next: null }
           ]
         },
         'nice-drawers': {
-          text: "...I'm going to pretend you didn't say that. Is there something you actually NEED?",
+          text: "...I'm going to file that remark under 'Things I'm Pretending I Didn't Hear.' Is there something you actually NEED?",
           choices: [
             { text: "I need Form 27-B.", next: 'need-form' }
           ]
         },
         'offer-coffee': {
-          text: "Is that... is that COFFEE? Oh. Oh that's lovely. That's the warmest thing anyone's done for me in centuries. ...Fine. Here's your stupid form.",
+          text: "Is that... is that COFFEE? Oh. Oh, you beautiful soul. That's the warmest thing anyone's done for me in centuries. I'd say you have GROUNDS for a form now. ...Fine. Take your stupid form.",
           choices: [
             { text: "Thanks, Chronicler.", next: 'thanks' }
           ],
@@ -126,7 +126,7 @@
           }
         },
         'thanks': {
-          text: "*sniff* Nobody ever brings ME coffee. ...Now get out before I change my mind and refile you under 'Miscellaneous Nuisances.'",
+          text: "*sniff* Nobody ever brings ME coffee. ...Now get out before I change my mind and refile you under 'Permanently Lost.' Trust me, nobody EVER finds Permanently Lost.",
           choices: []
         }
       }
