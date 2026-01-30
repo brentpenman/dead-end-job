@@ -109,11 +109,8 @@
       }
       slot.appendChild(icon);
 
-      // Create name label
-      var nameLabel = document.createElement('div');
-      nameLabel.className = 'item-name';
-      nameLabel.textContent = item.name;
-      slot.appendChild(nameLabel);
+      // Set tooltip data for hover display
+      slot.dataset.tooltip = item.name;
 
       // Click handler: select item
       slot.addEventListener('click', function() {
@@ -179,14 +176,16 @@
 
       // Check if hotspot accepts this item
       if (hotspotData.acceptsItem === selectedItem) {
+        // Execute onUseItem callback first — returning false cancels the action
+        if (hotspotData.onUseItem && typeof hotspotData.onUseItem === 'function') {
+          if (hotspotData.onUseItem() === false) {
+            return false;
+          }
+        }
+
         // Success! Item works on this hotspot
         var successText = hotspotData.useItemText || 'Used ' + selectedItem;
         Game.showText(successText);
-
-        // Execute onUseItem callback if provided
-        if (hotspotData.onUseItem && typeof hotspotData.onUseItem === 'function') {
-          hotspotData.onUseItem();
-        }
 
         // Remove item from inventory
         Game.removeItem(selectedItem);

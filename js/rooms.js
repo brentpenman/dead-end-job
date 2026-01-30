@@ -45,7 +45,16 @@
           acceptsItem: 'bent-paperclip',
           useItemText: "I jam the paperclip into the mechanism and... *CLUNK*. It spits out a number. 2,147,483,647. Lucky me.",
           wrongItemText: "That's not going to unjam a ticket machine.",
-          onUseItem: function() { Game.setFlag('hasTicketNumber', true); }
+          onUseItem: function() {
+            Game.setFlag('hasTicketNumber', true);
+            Game.addItem({
+              id: 'ticket-number',
+              name: 'Ticket',
+              description: "Number 2,147,483,647. There's no way there are that many souls ahead of me... right?",
+              icon: 'data:image/svg+xml,' + encodeURIComponent('<svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg"><rect x="4" y="8" width="32" height="24" rx="3" fill="#fef3c7" stroke="#d97706" stroke-width="1.5"/><text x="20" y="23" font-size="5" font-family="monospace" font-weight="bold" fill="#92400e" text-anchor="middle">#2147483647</text><text x="20" y="29" font-size="4" font-family="sans-serif" fill="#b45309" text-anchor="middle">TAKE A NUMBER</text></svg>')
+            });
+            if (typeof Inventory !== 'undefined') Inventory.render();
+          }
         },
         {
           id: 'poster-1',
@@ -124,7 +133,14 @@
           width: 16.11,
           height: 27.92,
           label: 'The Clerk',
-          dialogueId: 'clerk'
+          dialogueId: 'clerk',
+          acceptsItem: 'ticket-number',
+          useItemText: "The Clerk takes your number. \"2,147,483,647. That's you? Fine. Form 27-B from Filing, stamp from the Manager. Go.\"",
+          wrongItemText: "The Clerk stares blankly. \"I don't need that.\"",
+          onUseItem: function() {
+            Game.setFlag('hasTicketNumber', true);
+            Game.setFlag('clerkGaveDirections', true);
+          }
         },
         {
           id: 'desk-bell',
@@ -318,7 +334,20 @@
           width: 19.31,
           height: 52.4,
           label: 'The Chronicler',
-          dialogueId: 'cabinet'
+          dialogueId: 'cabinet',
+          acceptsItem: 'coffee-mug',
+          useItemText: "The Chronicler's eyes go wide. \"Is that COFFEE?! Oh, you beautiful soul. You have GROUNDS for a form now.\" *Hands over Form 27-B.*",
+          wrongItemText: "The Chronicler scowls. \"What am I supposed to do with THAT? Bring me something WARM.\"",
+          onUseItem: function() {
+            Game.addItem({
+              id: 'form-27b',
+              name: 'Form 27-B',
+              description: 'An official afterlife processing form. Needs a stamp.',
+              icon: 'data:image/svg+xml,' + encodeURIComponent('<svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg"><rect x="6" y="4" width="28" height="34" rx="2" fill="#f5f0e6" stroke="#a3a3a3" stroke-width="1.5"/><line x1="10" y1="12" x2="30" y2="12" stroke="#d4d4d4" stroke-width="1"/><line x1="10" y1="17" x2="30" y2="17" stroke="#d4d4d4" stroke-width="1"/><line x1="10" y1="22" x2="25" y2="22" stroke="#d4d4d4" stroke-width="1"/><text x="20" y="32" font-size="7" font-family="sans-serif" font-weight="bold" fill="#4b5563" text-anchor="middle">27-B</text></svg>')
+            });
+            Game.setFlag('gotForm27B', true);
+            if (typeof Inventory !== 'undefined') Inventory.render();
+          }
         },
         {
           id: 'cabinet-row-left',
@@ -387,7 +416,20 @@
           width: 17.84,
           height: 21.53,
           label: 'The Manager',
-          dialogueId: 'manager'
+          dialogueId: 'manager',
+          acceptsItem: 'rubber-stamp',
+          useItemText: "\"OH BOY! Form AND stamp!\" *STAMP* \"APPROVED! You're FREE to go! CONGRATULATIONS!\"",
+          wrongItemText: "The Manager tilts his head. \"That's nice, but I need the official stamp!\"",
+          onUseItem: function() {
+            if (!Game.hasItem('form-27b')) {
+              Game.showText("I have the stamp, but I still need Form 27-B.");
+              return false;
+            }
+            Game.removeItem('form-27b');
+            Game.setFlag('formStamped', true);
+            if (typeof Inventory !== 'undefined') Inventory.render();
+            setTimeout(function() { Game.triggerEnding(); }, 2000);
+          }
         },
         {
           id: 'manager-desk',

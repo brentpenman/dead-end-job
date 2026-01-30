@@ -16,7 +16,7 @@
           choices: [
             { text: "But there's nobody else here.", next: 'nobody' },
             { text: "Where do I even start?", next: 'directions' },
-            { text: "I have a number.", next: 'has-number', condition: { hasFlag: 'hasTicketNumber' } },
+            { text: "I have a number.", next: 'has-number', condition: { hasItem: 'ticket-number' } },
             { text: "I have Form 27-B.", next: 'has-form', condition: { hasItem: 'form-27b' } }
           ]
         },
@@ -36,7 +36,7 @@
             { text: "That's a lot of numbers ahead of me.", next: 'big-number' },
             { text: "Where's the Filing Room?", next: 'filing-directions' }
           ],
-          action: { setFlag: { clerkGaveDirections: true } }
+          action: { setFlag: { clerkGaveDirections: true }, removeItem: 'ticket-number' }
         },
         'big-number': {
           text: "Everyone's number is that. The machine only prints one number. Budget cuts.",
